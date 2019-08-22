@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T7v-yk-ER4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2qJ-Mx-JJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -298,7 +298,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YmW-ia-8eP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501" y="-1667"/>
+            <point key="canvasLocation" x="-3846" y="85"/>
         </scene>
         <!--Auth-->
         <scene sceneID="097-Ft-g4a">
@@ -308,7 +308,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jK9-U7-GSA" customClass="DesignableButton" customModule="DogFinder" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jK9-U7-GSA">
                                 <rect key="frame" x="82.5" y="386.5" width="210" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="G3O-FS-MKc"/>
@@ -316,17 +316,17 @@
                                 </constraints>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="loginButtonClicked:" destination="HZi-MC-CIv" eventType="touchUpInside" id="QDW-s2-ML9"/>
+                                    <segue destination="2Os-Ff-GEl" kind="show" id="7OD-88-nsd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myx-UG-uZe" customClass="DesignableButton" customModule="DogFinder" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myx-UG-uZe">
                                 <rect key="frame" x="82.5" y="476.5" width="210" height="60"/>
                                 <state key="normal" title="Signup"/>
                                 <connections>
-                                    <action selector="signUpButtonClicked:" destination="HZi-MC-CIv" eventType="touchUpInside" id="tH9-bI-1PP"/>
+                                    <segue destination="2fI-pC-E2h" kind="show" id="UHe-B4-w0T"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Use" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-J8-tal" customClass="DesignableLabel" customModule="DogFinder" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Use" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-J8-tal">
                                 <rect key="frame" x="136.5" y="566.5" width="102" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -388,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJc-hR-Nef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1412" y="-1667"/>
+            <point key="canvasLocation" x="-2934" y="85"/>
         </scene>
         <!--Login-->
         <scene sceneID="kQa-D3-xaB">
@@ -468,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-fn-QvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="-1979"/>
+            <point key="canvasLocation" x="-1882" y="-227"/>
         </scene>
         <!--Register-->
         <scene sceneID="hXH-yY-inu">
@@ -537,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tpA-Jf-WVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="-1228"/>
+            <point key="canvasLocation" x="-1882" y="524"/>
         </scene>
         <!--Forgot Password-->
         <scene sceneID="aZm-Wg-3Wu">
@@ -584,7 +584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8C-AB-jtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3604" y="-1979"/>
+            <point key="canvasLocation" x="-742" y="-227"/>
         </scene>
         <!--Search Dogs Table View Controller-->
         <scene sceneID="sR0-05-Ayh">
@@ -708,4 +708,8 @@
         <image name="icons8-round" width="50" height="50"/>
         <image name="lunch_icon" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CpD-9U-Il9"/>
+        <segue reference="TKK-KW-0wx"/>
+    </inferredMetricsTieBreakers>
 </document>
