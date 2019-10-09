@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func fillDbWithTestData() {
         
         var dogImage = UIImage(named: "doberman")
-        var dogImageData = dogImage?.jpegData(compressionQuality: 0.1)
+        var dogImageData = dogImage?.jpegData(compressionQuality: 0.01)
         var dogImageBase = dogImageData?.base64EncodedString()
         let dog1 = Dog(id: "0", breed: "Doberman", longitude: 51.059254, latitude: 17.022787, seenDate: Date(), photo: dogImageBase!, user: "Admin")
 

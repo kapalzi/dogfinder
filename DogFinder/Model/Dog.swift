@@ -28,6 +28,7 @@ class Dog: Hashable {
     static let kLatitude = "latitude"
     static let kSeenDate = "seenDate"
     static let kPhoto = "photo"
+    static let kPhotoName = "photoName"
     static let kUser = "user"
 
     let id: String
@@ -36,9 +37,10 @@ class Dog: Hashable {
     let latitude: Double
     let seenDate: Date
     var photo: String = ""
+    var photoName: String = ""
     let user: String
     
-    init(id: String = "", breed: String, longitude: Double, latitude: Double, seenDate: Date, photo: String = "", user: String) {
+    init(id: String = "", breed: String, longitude: Double, latitude: Double, seenDate: Date, photo: String = "", photoName: String = "", user: String) {
         self.id = id
         self.breed = breed
         self.longitude = longitude
@@ -46,6 +48,7 @@ class Dog: Hashable {
         self.seenDate = seenDate
         self.photo = photo
         self.user = user
+        self.photoName  = photoName
     }
     
     public static func fromJson(json: JSON) -> Dog? {
@@ -55,6 +58,7 @@ class Dog: Hashable {
                       longitude: json[Dog.kLongitude].double ?? 0,
                       latitude: json[Dog.kLatitude].double ?? 0,
                       seenDate: SimpleDateFormatter.dateFromUnixInterval(json[Dog.kSeenDate].doubleValue),
+                      photoName: json[Dog.kPhotoName].string ?? "",
                       user: json[Dog.kUser].string ?? "")
         
         return dog

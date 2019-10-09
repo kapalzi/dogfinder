@@ -16,7 +16,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(cors())
 
 //Set a static folder
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'/data/img')))
 
 app.use('/api/members', require('./routes/api/members'))
 app.use('/api/posts', require('./routes/api/posts'))

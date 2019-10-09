@@ -13,8 +13,8 @@ import SwiftyJSON
 class DogFinderApi {
     public static let sharedInstance = DogFinderApi()
     
-    private let baseURL = "http://192.168.1.160:5000"
-//    private let baseURL = "http://localhost:5000"
+//    private let baseURL = "http://192.168.1.160:5000"
+    private let baseURL = "http://localhost:5000"
     
     private enum Endpoint:String {
         case getAllDogs = "/api/dogs"
@@ -52,7 +52,7 @@ class DogFinderApi {
 //            case .success(let responseObject):
 //
 //                let json = JSON(responseObject)
-//
+//ope
 //            case .failure(_):
 //                print(response.error)
 //            }
@@ -96,5 +96,10 @@ class DogFinderApi {
                 errorHandler(response.error!)
             }
         }
+    }
+    
+    public func getUrlOfPhoto(photoName: String) -> URL {
+        
+        return URL(string: "\(baseURL)/\(photoName)")!
     }
 }

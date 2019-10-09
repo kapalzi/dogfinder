@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchDogsTableViewController: UIViewController {
 
@@ -36,7 +37,7 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         let dog = self.viewModel.dogs[indexPath.row]
         cell.breedLbl.text = dog.breed
         cell.dateLbl.text = "Last seen: \(dog.seenDate)"
-        cell.dogImageView.image = UIImage(data: Data(base64Encoded: dog.photo)!)
+        cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
     }
     
 }

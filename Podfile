@@ -8,6 +8,7 @@ target 'DogFinder' do
   # Pods for DogFinder
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'DogFinderTests' do
     inherit! :search_paths

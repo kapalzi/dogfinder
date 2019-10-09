@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Kingfisher
 
 class SearchDogsMapViewController: UIViewController, CurrentLocationProtocol {
     
@@ -76,7 +77,8 @@ extension SearchDogsMapViewController: MKMapViewDelegate {
         if let annotationImage = mapAnnotation.image {
             
             let imageView = UIImageView(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
-            imageView.image = UIImage(data: Data(base64Encoded: annotationImage)!)
+//            imageView.image = UIImage(data: Data(base64Encoded: annotationImage)!)
+            imageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: annotationImage))
             imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
             imageView.layer.masksToBounds = true
             annatationView?.addSubview(imageView)
@@ -95,8 +97,7 @@ extension SearchDogsMapViewController: MKMapViewDelegate {
             let annatation = MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: dog.latitude)!, longitude: CLLocationDegrees(dog.longitude)))
             annatation.title = dog.breed
             annatation.subtitle = "Last seen: \(dog.seenDate)"
-            annatation.image = dog.photo
-            
+            annatation.image = dog.photoName
             self.mapView.addAnnotation(annatation)
             
             //tmp
