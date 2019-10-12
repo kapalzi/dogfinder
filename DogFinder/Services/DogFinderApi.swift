@@ -20,13 +20,22 @@ class DogFinderApi {
     private enum Endpoint:String {
         case getAllDogs = "/api/dogs"
         case getPhotos = "/api/dogs/photos"
+        case login = "/api/users/login"
+        case register = "/api/users/register"
     }
     
     private func createRequestPath(endpoint:Endpoint, param:String = "") -> String {
         
         let formedPath = baseURL + "\(endpoint.rawValue)" + "/\(param)"
-        
         return formedPath
+    }
+    
+    private func createAuthorizationHeaders() -> HTTPHeaders?
+    {
+        
+        let header: HTTPHeaders = ["x-access-token" : "\(SessionController.sharedInstance.token ?? "")"]
+        
+        return header
     }
     
     private func performRequest(method:HTTPMethod, url:String, parameters:Parameters?, encoding:ParameterEncoding, headers:[String:String]?, handler:((_:(DataResponse<Any>)) -> Void)?)
@@ -62,12 +71,8 @@ class DogFinderApi {
     
     //Get all dogs
     public func getAllDogs(completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error:Error) -> Void)) {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let header: HTTPHeaders = [
-//        "Authorization" : "Bearer \(appDelegate.token)"
-//        ]
-        
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs), parameters: nil, encoding: JSONEncoding.default, headers: nil) { (response) in
+
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)
@@ -80,27 +85,32 @@ class DogFinderApi {
         }
     }
     
-    public func getAllDogPhotos(completionHandler:@escaping ((_:[DogPhoto]?) -> Void), errorHandler:@escaping ((_ error:Error) -> Void)) {
-        //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //        let header: HTTPHeaders = [
-        //        "Authorization" : "Bearer \(appDelegate.token)"
-        //        ]
+    public func getUrlOfPhoto(photoName: String) -> URL {
         
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getPhotos), parameters: nil, encoding: JSONEncoding.default, headers: nil) { (response) in
+        return URL(string: "\(baseURL)/\(photoName)")!
+    }
+    
+    public func login(username: String, password: String, completionHandler:@escaping (()->Void), errorHandler:@escaping ((_ error:Error) -> Void)) {
+        
+        let params = ["username": username, "password": password] as Parameters
+        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .login), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)
-                
-                DogFinderApiParser.parseJsonWithDogPhotos(json, completionHandler: completionHandler)
+                DogFinderApiParser.parseJsonWithUser(json, completionHandler: { (user) in
+                    
+                    SessionController.sharedInstance.currentUser = user
+                    
+                    if let headers = response.response?.allHeaderFields as? [String: String] {
+                        let token = headers["x-auth-token"]
+                        SessionController.sharedInstance.token = token
+                    }
+                })
+                completionHandler()
                 
             case .failure(_):
                 errorHandler(response.error!)
             }
         }
-    }
-    
-    public func getUrlOfPhoto(photoName: String) -> URL {
-        
-        return URL(string: "\(baseURL)/\(photoName)")!
     }
 }

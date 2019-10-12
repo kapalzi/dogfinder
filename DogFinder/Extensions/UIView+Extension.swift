@@ -10,8 +10,8 @@ import UIKit
 
 extension UIView{
     
-    func dropShadow() {
-        self.backgroundColor = #colorLiteral(red: 0.9803171754, green: 0.9804343581, blue: 0.9802773595, alpha: 1)
+    func dropShadow(backgroundColor:UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
+        self.backgroundColor = backgroundColor
         self.layer.cornerRadius = 15
         self.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.layer.shadowOpacity = 0.25

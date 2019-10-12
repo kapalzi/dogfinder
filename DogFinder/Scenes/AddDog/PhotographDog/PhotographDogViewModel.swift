@@ -14,6 +14,13 @@ class PhotographDogViewModel {
     
     let classifier = ImageClassifier()
     
+    func checkUserSession(completion: @escaping (()->Void)) {
+        
+        if SessionController.sharedInstance.currentUser == nil || SessionController.sharedInstance.token == nil {
+            completion()
+        }
+    }
+    
     func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage {
         
         let imageBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!

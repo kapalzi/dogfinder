@@ -28,6 +28,15 @@ class DogFinderApiParser {
         }
     }
     
+    public class func parseJsonWithUser(_ json:JSON, completionHandler:@escaping ((_:User)->Void)) {
+        
+        if let user = User.fromJson(json: json) {
+            completionHandler(user)
+            return
+        }
+        
+    }
+    
     public class func parseJsonWithDogPhotos(_ json:JSON, completionHandler:@escaping ((_:[DogPhoto])->Void)) {
         
         var dogPhotoRecords = [DogPhoto]()

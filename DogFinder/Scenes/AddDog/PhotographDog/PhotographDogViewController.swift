@@ -35,8 +35,11 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         case configurationFailed
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.checkUserSession()
         self.checkAuthorization()
         sessionQueue.async { [unowned self] in
             self.configureSession()
@@ -229,6 +232,19 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         
         self.viewModel.recognizeImage(self.capturedImage) { (results) in
             self.presentConfirmDog(results: results)
+        }
+    }
+    
+    func checkUserSession() {
+        
+        self.viewModel.checkUserSession {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AuthHomeViewController") as! AuthHomeViewController
+            
+            let navCont = UINavigationController(rootViewController: vc)
+            navCont.navigationBar.tintColor = #colorLiteral(red: 0.9567165971, green: 0.8978132606, blue: 0.7615829706, alpha: 1)
+            navCont.navigationBar.barTintColor = #colorLiteral(red: 0.1609984934, green: 0.3689207435, blue: 0.305126965, alpha: 1)
+            self.navigationController?.present(navCont, animated: true, completion: nil)
         }
     }
     
