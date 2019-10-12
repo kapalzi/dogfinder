@@ -100,7 +100,9 @@ class ConfirmDogViewController: UIViewController {
     
     @IBAction func saveClicked(_ sender: UIButton) {
         
-        self.viewModel.saveDog()
+        self.viewModel.saveDog {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

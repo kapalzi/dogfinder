@@ -31,7 +31,7 @@ class ConfirmDogViewModel: NSObject, CurrentLocationProtocol  {
         completion()
     }
     
-    func saveDog() {
+    func saveDog(completion: (()->Void)) {
         
         guard let breed = self.selectedBreed, self.selectedBreed != "" else {
             return
@@ -45,6 +45,7 @@ class ConfirmDogViewModel: NSObject, CurrentLocationProtocol  {
         let dog1 = Dog(id: "", breed: breed, longitude: coordinates.longitude, latitude: coordinates.latitude, seenDate: Date(), photo: dogImageBase!, user: "Admin")
         
         DogFinderApi.sharedInstance.addDog(dog1)
+        completion()
     }
     
     func validateForSave() {

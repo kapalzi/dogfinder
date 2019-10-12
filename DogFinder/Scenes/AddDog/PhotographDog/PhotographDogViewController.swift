@@ -37,12 +37,12 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.checkAuthorization()
-//        sessionQueue.async { [unowned self] in
-//            self.configureSession()
-//        }
+        self.checkAuthorization()
+        sessionQueue.async { [unowned self] in
+            self.configureSession()
+        }
         self.setupButtons()
-//        self.setupPreview()
+        self.setupPreview()
         self.navigationController?.isToolbarHidden = true
     }
     

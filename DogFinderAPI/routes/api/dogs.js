@@ -1,14 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const Dog = require('../../models/Dog')
-const DogPhoto = require('../../models/DogPhoto')
-const multiparty = require('multiparty')
 var fs = require('fs')
 const path = require('path')
 const uuidv4 = require('uuid/v4');
+const auth = require("../../middleware/auth");
 
 //Get All
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const dogs = await Dog.find()
         res.json(dogs)
