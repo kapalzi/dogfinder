@@ -14,4 +14,10 @@ class SessionController {
     public var token: String! = ""
     public var currentUser: User!
     
+    func logout() {
+        
+        self.currentUser = nil
+        self.token = nil
+    }
+    
 }

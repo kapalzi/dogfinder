@@ -17,6 +17,10 @@
 		E265BF7F230182B9009C5693 /* DogPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265BF7E230182B9009C5693 /* DogPrediction.swift */; };
 		E2662CDE2352383F00A39D8E /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CDD2352383F00A39D8E /* SessionController.swift */; };
 		E2662CE0235246C900A39D8E /* AuthHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CDF235246C900A39D8E /* AuthHomeViewController.swift */; };
+		E2662CE2235260C700A39D8E /* DismissCameraProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CE1235260C700A39D8E /* DismissCameraProtocol.swift */; };
+		E2662CE5235261F100A39D8E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CE4235261F100A39D8E /* BaseViewController.swift */; };
+		E2662CE72352708600A39D8E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CE62352708600A39D8E /* RegisterViewController.swift */; };
+		E2662CE92352709500A39D8E /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2662CE82352709500A39D8E /* RegisterViewModel.swift */; };
 		E27AFCCA22FC49BC00542C6A /* DogPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AFCC922FC49BC00542C6A /* DogPhoto.swift */; };
 		E27AFCCC22FC66CA00542C6A /* MapAnnatation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AFCCB22FC66CA00542C6A /* MapAnnatation.swift */; };
 		E285DF8422ED76ED00A39F47 /* DogFinderApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E285DF8322ED76ED00A39F47 /* DogFinderApi.swift */; };
@@ -68,6 +72,10 @@
 		E265BF7E230182B9009C5693 /* DogPrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPrediction.swift; sourceTree = "<group>"; };
 		E2662CDD2352383F00A39D8E /* SessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
 		E2662CDF235246C900A39D8E /* AuthHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHomeViewController.swift; sourceTree = "<group>"; };
+		E2662CE1235260C700A39D8E /* DismissCameraProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissCameraProtocol.swift; sourceTree = "<group>"; };
+		E2662CE4235261F100A39D8E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		E2662CE62352708600A39D8E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E2662CE82352709500A39D8E /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E27AFCC922FC49BC00542C6A /* DogPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPhoto.swift; sourceTree = "<group>"; };
 		E27AFCCB22FC66CA00542C6A /* MapAnnatation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnatation.swift; sourceTree = "<group>"; };
 		E285DF8322ED76ED00A39F47 /* DogFinderApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFinderApi.swift; sourceTree = "<group>"; };
@@ -142,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				E2426A022306E65B00DCF6F5 /* CurrentLocationProtocol.swift */,
+				E2662CE1235260C700A39D8E /* DismissCameraProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -162,6 +171,14 @@
 				E265BF7823017DA8009C5693 /* ConfirmDog */,
 			);
 			path = AddDog;
+			sourceTree = "<group>";
+		};
+		E2662CE3235261E200A39D8E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E2662CE4235261F100A39D8E /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		E28DBD08230EBB17002D0480 /* Authentication */ = {
@@ -202,6 +219,8 @@
 		E28DBD0D230EBB7E002D0480 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				E2662CE62352708600A39D8E /* RegisterViewController.swift */,
+				E2662CE82352709500A39D8E /* RegisterViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -282,6 +301,7 @@
 		E2B7095322E34D7600FC7659 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E2662CE3235261E200A39D8E /* Base */,
 				E28DBD08230EBB17002D0480 /* Authentication */,
 				E265BF7D23017DD3009C5693 /* AddDog */,
 				E2B7095D22E3624A00FC7659 /* SearchDogs */,
@@ -546,12 +566,15 @@
 				E2BD6D5222FAE6AC00FA4569 /* SimpleDateFormatter.swift in Sources */,
 				E2B7097522E50FF600FC7659 /* User.swift in Sources */,
 				E27AFCCC22FC66CA00542C6A /* MapAnnatation.swift in Sources */,
+				E2662CE92352709500A39D8E /* RegisterViewModel.swift in Sources */,
 				E2B7096A22E4B16D00FC7659 /* SearchDogsTableViewController.swift in Sources */,
 				E21E5FB922F09C4800A0F36E /* DogFinderApiParser.swift in Sources */,
+				E2662CE5235261F100A39D8E /* BaseViewController.swift in Sources */,
 				E2B7097322E4F98D00FC7659 /* SearchDogsTableViewCell.swift in Sources */,
 				E2426A032306E65B00DCF6F5 /* CurrentLocationProtocol.swift in Sources */,
 				E2B7096E22E4B1AE00FC7659 /* SearchDogsMapViewController.swift in Sources */,
 				E28DBD11230EC006002D0480 /* LoginViewModel.swift in Sources */,
+				E2662CE2235260C700A39D8E /* DismissCameraProtocol.swift in Sources */,
 				E265BF7A23017DC3009C5693 /* ConfirmDogViewController.swift in Sources */,
 				E2B7096522E3629B00FC7659 /* SearchDogsViewModel.swift in Sources */,
 				E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */,
@@ -562,6 +585,7 @@
 				E27AFCCA22FC49BC00542C6A /* DogPhoto.swift in Sources */,
 				E2662CE0235246C900A39D8E /* AuthHomeViewController.swift in Sources */,
 				E265BF7C23017DCE009C5693 /* ConfirmDogViewModel.swift in Sources */,
+				E2662CE72352708600A39D8E /* RegisterViewController.swift in Sources */,
 				E265BF7F230182B9009C5693 /* DogPrediction.swift in Sources */,
 				E2662CDE2352383F00A39D8E /* SessionController.swift in Sources */,
 				E2C06CC022FD9D5600759646 /* UIImage+Extension.swift in Sources */,

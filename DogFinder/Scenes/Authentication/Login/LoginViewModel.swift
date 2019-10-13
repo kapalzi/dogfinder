@@ -10,9 +10,6 @@ import Foundation
 
 class LoginViewModel {
     
-    var username: String?
-    var password: String?
-    
     func login(username:String?, password: String?, completion: @escaping (()->Void)) {
         
         guard let username = username else { return }

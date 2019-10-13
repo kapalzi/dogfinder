@@ -34,25 +34,28 @@ router.post("/register", async (req, res) => {
   });
 });
 
-router.post("/login", async (req, res) => {  
-    //find an existing user
+router.post("/login", async (req, response) => {  
     let user = await User.findOne({ username: req.body.username });
     console.log(user)
     if (user) {
-        let password = await bcrypt.hash(req.body.password, 10)
-        console.log(password)
-        if (bcrypt.compare(req.body.password, user.password)) {
-            const token = user.generateAuthToken();
-            res.header("x-auth-token", token).send({
-              _id: user._id,
-              username: user.username,
-              email: user.email
-            });
-        } else {
-            return res.status(400).send("Wrong password.");
-        }
-    } else {
-        return res.status(400).send("User does not exist.");
+
+        bcrypt.compare(req.body.password, user.password, function(err, res) {
+            if (err){
+              console.log(err)
+            }
+            if (res) {
+                const token = user.generateAuthToken();
+                response.header("x-auth-token", token).send({
+                  _id: user._id,
+                  username: user.username,
+                  email: user.email
+                });
+            } else {
+              return response.status(400).send("Wrong password.");
+            }
+          });
+         } else {
+        return response.status(400).send("User does not exist.");
     }
   });
 

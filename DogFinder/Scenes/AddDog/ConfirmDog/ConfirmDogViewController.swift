@@ -32,15 +32,13 @@ class ConfirmDogViewController: UIViewController {
             target: self,
             action: #selector(self.cancelClicked(_:)))
         
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
-        
         self.imageView.image = self.viewModel.dogPhoto
         
-        self.firstBreedBtn.dropShadow()
-        self.secondBreedBtn.dropShadow()
-        self.thirdBreedBtn.dropShadow()
-        self.typeOwnBtn.dropShadow()
-        self.saveBtn.dropShadow()
+        self.firstBreedBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
+        self.secondBreedBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
+        self.thirdBreedBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
+        self.typeOwnBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
+        self.saveBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
         
         self.firstBreedBtn.setTitle(self.viewModel.dogPredictions[0].buttonTitleString(), for: .normal)
         self.secondBreedBtn.setTitle(self.viewModel.dogPredictions[1].buttonTitleString(), for: .normal)

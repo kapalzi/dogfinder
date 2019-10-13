@@ -47,13 +47,8 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.setupButtons()
         self.setupPreview()
         self.navigationController?.isToolbarHidden = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         
-        super.viewWillAppear(animated)
-        
-        
+        self.addTmpPinch()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,7 +61,6 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.takePhotoBtn.setBackgroundImage(takePhotoImage, for: .normal)
         self.takePhotoBtn.contentMode = .scaleToFill
         self.takePhotoBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    
     }
     
     func checkAuthorization() {
@@ -240,11 +234,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.viewModel.checkUserSession {
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "AuthHomeViewController") as! AuthHomeViewController
-            
-            let navCont = UINavigationController(rootViewController: vc)
-            navCont.navigationBar.tintColor = #colorLiteral(red: 0.9567165971, green: 0.8978132606, blue: 0.7615829706, alpha: 1)
-            navCont.navigationBar.barTintColor = #colorLiteral(red: 0.1609984934, green: 0.3689207435, blue: 0.305126965, alpha: 1)
-            self.navigationController?.present(navCont, animated: true, completion: nil)
+            self.navigationController?.present(self.createNavController(rootViewController: vc), animated: true, completion: nil)
         }
     }
     
@@ -253,8 +243,15 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmDogViewController") as! ConfirmDogViewController
         vc.initViewModel(predictions: results, dogPhoto: self.capturedImage!)
         
-        let navCont = UINavigationController(rootViewController: vc)
-        self.navigationController?.present(navCont, animated: true, completion: nil)
+        self.navigationController?.present(self.createNavController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    func createNavController(rootViewController: UIViewController) -> UINavigationController {
+        
+        let navCont = UINavigationController(rootViewController: rootViewController)
+        navCont.navigationBar.tintColor = #colorLiteral(red: 0.9567165971, green: 0.8978132606, blue: 0.7615829706, alpha: 1)
+        navCont.navigationBar.barTintColor = #colorLiteral(red: 0.1609984934, green: 0.3689207435, blue: 0.305126965, alpha: 1)
+        return navCont
     }
     
     @IBAction func takePhotoDidTap(_ sender: UIButton) {
@@ -264,5 +261,17 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
     @IBAction func deleteDidTap(_ sender: UIButton) {
         
         
+    }
+    
+    //tmp
+    func addTmpPinch() {
+        
+        let tap: UIPinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinch))
+        self.previewView.addGestureRecognizer(tap)
+    }
+    
+    @objc func pinch() {
+        SessionController.sharedInstance.logout()
+        self.checkUserSession()
     }
 }

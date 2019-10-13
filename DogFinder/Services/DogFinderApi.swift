@@ -113,4 +113,28 @@ class DogFinderApi {
             }
         }
     }
+    
+    public func register(username: String, password: String, email: String, completionHandler:@escaping (()->Void), errorHandler:@escaping ((_ error:Error) -> Void)) {
+        
+        let params = ["email": email, "username": username, "password": password] as Parameters
+        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .register), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
+            switch response.result {
+            case .success(let responseObject):
+                let json = JSON(responseObject)
+                DogFinderApiParser.parseJsonWithUser(json, completionHandler: { (user) in
+                    
+                    SessionController.sharedInstance.currentUser = user
+                    
+                    if let headers = response.response?.allHeaderFields as? [String: String] {
+                        let token = headers["x-auth-token"]
+                        SessionController.sharedInstance.token = token
+                    }
+                })
+                completionHandler()
+                
+            case .failure(_):
+                errorHandler(response.error!)
+            }
+        }
+    }
 }
