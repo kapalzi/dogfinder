@@ -65,6 +65,16 @@ class ConfirmDogViewController: UIViewController {
         self.thirdBreedBtn.setTitleColor(.darkGray, for: .normal)
     }
     
+    private func showAlert(withMessage message: String) {
+        
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func cancelClicked(_: Any)
     {
         self.navigationController?.dismiss(animated: true, completion: nil)
@@ -98,8 +108,10 @@ class ConfirmDogViewController: UIViewController {
     
     @IBAction func saveClicked(_ sender: UIButton) {
         
-        self.viewModel.saveDog {
-            self.navigationController?.dismiss(animated: true, completion: nil)
+        self.viewModel.saveDog(completion: { (message) in
+            self.showAlert(withMessage: message)
+        }) { (errorMessage) in
+            self.showAlert(withMessage: errorMessage)
         }
     }
     

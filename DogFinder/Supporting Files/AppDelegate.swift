@@ -58,9 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dogImageBase = dogImageData?.base64EncodedString()
         let dog3 = Dog(id: "0", breed: "Dalmatian", longitude: 51.059534, latitude: 17.022623, seenDate: Date(), photo: dogImageBase!, user: "Admin")
 
-        DogFinderApi.sharedInstance.addDog(dog1)
-        DogFinderApi.sharedInstance.addDog(dog2)
-        DogFinderApi.sharedInstance.addDog(dog3)
+//        DogFinderApi.sharedInstance.addDog(dog1)
+//        DogFinderApi.sharedInstance.addDog(dog2)
+//        DogFinderApi.sharedInstance.addDog(dog3)
     }
     
 

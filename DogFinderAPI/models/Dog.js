@@ -5,7 +5,6 @@ const DogSchema = mongoose.Schema({
     latitude: Number,
     longitude: Number,
     seenDate: Date,
-    // photo: String,//{ data: Buffer, contentType: String },
     photoName: String,
     user: String
 })

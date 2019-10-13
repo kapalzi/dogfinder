@@ -12,7 +12,6 @@ router.get('/', auth, async (req, res) => {
         const dogs = await Dog.find()
         res.json(dogs)
     } catch(err) {
-        console.log(err)
         res.json({ message: err })
     }
 })
@@ -32,20 +31,18 @@ router.get('/photo/:id', async (req, res) => {
 
 //Add new
 router.post('/', async (req, res) => {
-    console.log("Przyszedl!")
     const nameOfPhoto = uuidv4()
     const dog = new Dog({
         breed: req.body.breed,
         longitude: req.body.longitude,
         latitude: req.body.latitude,
-        seenDate: req.body.seenDate,
+        seenDate: new Date(),
         user: req.body.user,
         photoName: nameOfPhoto,
     })
 
     var base64Data = req.body.photo.replace(/^data:image\/jpeg;base64,/, "");
     const pathToSave = path.join(__dirname, '../../data/img/'+ nameOfPhoto + '.jpg')
-    console.log(pathToSave)
     fs.writeFile(pathToSave, base64Data, "base64", function(err) {
             if (err) {
                 console.log(err);

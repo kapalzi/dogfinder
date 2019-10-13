@@ -36,7 +36,6 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, response) => {  
     let user = await User.findOne({ username: req.body.username });
-    console.log(user)
     if (user) {
 
         bcrypt.compare(req.body.password, user.password, function(err, res) {

@@ -53,19 +53,20 @@ class DogFinderApi {
         }
     }
     
-    public func addDog(_ dog: Dog) {
+    public func addDog(_ dog: Dog, completionHandler:@escaping ((String) -> Void), errorHandler:@escaping ((String) -> Void)) {
         
         let params = dog.serializeToJson()
 
         self.performRequest(method: .post, url: self.createRequestPath(endpoint: .getAllDogs), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
-//            switch response.result {
-//            case .success(let responseObject):
-//
-//                let json = JSON(responseObject)
-//ope
-//            case .failure(_):
-//                print(response.error)
-//            }
+            switch response.result {
+            case .success(let responseObject):
+                let json = JSON(responseObject)
+                print(json["message"].string ?? "")
+                completionHandler(json["message"].string ?? "")
+                
+            case .failure(let error):
+                errorHandler(error.localizedDescription)
+            }
         }
     }
     
