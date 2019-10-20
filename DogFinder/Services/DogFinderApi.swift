@@ -14,7 +14,7 @@ class DogFinderApi {
     public static let sharedInstance = DogFinderApi()
     
 //    private let baseURL = "http://192.168.1.160:5000" //biuro
-    private let baseURL = "http://192.168.1.16:5000"    //dom
+    private let baseURL = "http://192.168.1.10:5000"    //dom
 //    private let baseURL = "http://localhost:5000"
     
     private enum Endpoint:String {

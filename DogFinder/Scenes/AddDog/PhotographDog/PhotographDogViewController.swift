@@ -243,7 +243,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmDogViewController") as! ConfirmDogViewController
         vc.initViewModel(predictions: results, dogPhoto: self.capturedImage!)
         
-        self.navigationController?.present(self.createNavController(rootViewController: vc), animated: true, completion: nil)
+        self.navigationController?.show(self.createNavController(rootViewController: vc), sender:nil)
     }
     
     func createNavController(rootViewController: UIViewController) -> UINavigationController {
@@ -251,6 +251,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         let navCont = UINavigationController(rootViewController: rootViewController)
         navCont.navigationBar.tintColor = #colorLiteral(red: 0.9567165971, green: 0.8978132606, blue: 0.7615829706, alpha: 1)
         navCont.navigationBar.barTintColor = #colorLiteral(red: 0.1609984934, green: 0.3689207435, blue: 0.305126965, alpha: 1)
+        navCont.modalPresentationStyle = .fullScreen
         return navCont
     }
     

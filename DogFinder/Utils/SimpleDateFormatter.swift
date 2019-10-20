@@ -10,25 +10,16 @@ import Foundation
 
 class SimpleDateFormatter: NSObject
 {
-    public class func unixIntvalAsStringFromDate(_ date:Date) -> String
-    {
-        return String(format:"%.0f",date.timeIntervalSince1970)
-    }
-    
-    public class func dateFromUnixInterval(_ interval:Double) -> Date
-    {
-        return Date(timeIntervalSince1970: interval)
-    }
-    
-    public class func dateAndTimeStringFromDate(_ date:Date?) -> String
-    {
-        guard let validDate = date else {
-            return ""
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
+    public class func dateFromJs(_ date2:String) -> Date? {
         
-        return dateFormatter.string(from: validDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let date = dateFormatter.date(from: date2) {
+            print(date)  // "2015-05-15 21:58:00 +0000"
+            return date
+        }
+        
+        return nil
     }
 }

@@ -36,7 +36,7 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         
         let dog = self.viewModel.dogs[indexPath.row]
         cell.breedLbl.text = dog.breed
-        cell.dateLbl.text = "Last seen: \(dog.seenDate)"
+        cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
         cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
     }
     

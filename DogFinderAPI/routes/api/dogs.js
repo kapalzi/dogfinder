@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         breed: req.body.breed,
         longitude: req.body.longitude,
         latitude: req.body.latitude,
-        seenDate: new Date(),
+        seenDate: Date.now(),
         user: req.body.user,
         photoName: nameOfPhoto,
     })

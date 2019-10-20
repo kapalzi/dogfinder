@@ -57,7 +57,7 @@ class Dog: Hashable {
                       breed: json[Dog.kBreed].string ?? "",
                       longitude: json[Dog.kLongitude].double ?? 0,
                       latitude: json[Dog.kLatitude].double ?? 0,
-                      seenDate: SimpleDateFormatter.dateFromUnixInterval(json[Dog.kSeenDate].doubleValue),
+                      seenDate: SimpleDateFormatter.dateFromJs(json[Dog.kSeenDate].string ?? "") ?? Date(),
                       photoName: json[Dog.kPhotoName].string ?? "",
                       user: json[Dog.kUser].string ?? "")
         
@@ -71,7 +71,8 @@ class Dog: Hashable {
         serializedObject[Dog.kBreed] = self.breed
         serializedObject[Dog.kLongitude] = self.longitude
         serializedObject[Dog.kLatitude] = self.latitude
-        serializedObject[Dog.kSeenDate] = self.seenDate.timeIntervalSince1970////SimpleDateFormatter.unixIntvalAsStringFromDate(self.seenDate)
+        serializedObject[Dog.kSeenDate] = self.seenDate.timeIntervalSince1970
+        ////SimpleDateFormatter.unixIntvalAsStringFromDate(self.seenDate)
         serializedObject[Dog.kPhoto] = self.photo
         serializedObject[Dog.kUser] = self.user
         
