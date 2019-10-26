@@ -9,17 +9,17 @@
 import MapKit
 
 protocol CurrentLocationProtocol: CLLocationManagerDelegate {
-    
+
     var locationManager: CLLocationManager? { get set }
     var lastLocation: CLLocation? { get set }
-    
+
     func initLocationManager()
 }
 
 extension CurrentLocationProtocol {
-    
+
     func initLocationManager() {
-        
+
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.distanceFilter = kCLDistanceFilterNone

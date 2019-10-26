@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIImage {
-    
+
     // MARK: Transformations
-    
+
     func resize(newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         UIGraphicsGetCurrentContext()?.interpolationQuality = .high
@@ -21,7 +21,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-    
+
     func pixelBuffer() -> CVPixelBuffer? {
         // NOTE: Create pixel buffer with specified pixel format
         var pixelBuffer: CVPixelBuffer?
@@ -30,7 +30,7 @@ extension UIImage {
         guard status == kCVReturnSuccess, let finalPixelBuffer = pixelBuffer else {
             return nil
         }
-        
+
         // NOTE: Create context ("canvas") for drawing pixels
         CVPixelBufferLockBaseAddress(finalPixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
         let pixelData = CVPixelBufferGetBaseAddress(finalPixelBuffer)
@@ -40,13 +40,13 @@ extension UIImage {
         }
         context.translateBy(x: 0, y: size.height)
         context.scaleBy(x: 1.0, y: -1.0)
-        
+
         // NOTE: Draw pixels on the context, updates pixel buffer
         UIGraphicsPushContext(context)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         UIGraphicsPopContext()
         CVPixelBufferUnlockBaseAddress(finalPixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
+
         return finalPixelBuffer
     }
 }

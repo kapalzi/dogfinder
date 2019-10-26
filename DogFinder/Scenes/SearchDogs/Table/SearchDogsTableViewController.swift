@@ -12,9 +12,9 @@ import Kingfisher
 class SearchDogsTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     var viewModel: SearchDogsViewModel = SearchDogsViewModel()
-    
+
 }
 
 extension SearchDogsTableViewController: UITableViewDataSource {
@@ -22,34 +22,36 @@ extension SearchDogsTableViewController: UITableViewDataSource {
 
         return self.viewModel.dogs.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchDogsTableViewCell", for: indexPath) as? SearchDogsTableViewCell ?? SearchDogsTableViewCell(style: .default, reuseIdentifier: "SearchDogsTableViewCell")
-        
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchDogsTableViewCell",
+                                                 for: indexPath) as? SearchDogsTableViewCell ??
+            SearchDogsTableViewCell(style: .default, reuseIdentifier: "SearchDogsTableViewCell")
+
         self.initCell(cell, indexPath: indexPath)
-        
+
         return cell
     }
-    
-    func initCell(_ cell:SearchDogsTableViewCell, indexPath:IndexPath) {
-        
+
+    func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
+
         let dog = self.viewModel.dogs[indexPath.row]
         cell.breedLbl.text = dog.breed
         cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
         cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
     }
-    
+
 }
 
 extension SearchDogsTableViewController: UITableViewDelegate {
-    
+
 }
 
 extension SearchDogsTableViewController: SearchDogsViewModelDelegate {
-    
+
     func reloadTableView() {
-        
+
         self.tableView.reloadData()
     }
 }

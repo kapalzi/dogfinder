@@ -9,12 +9,12 @@
 import Foundation
 
 struct DogPrediction {
-    
+
     let breed: String
     let probability: Float
-    
+
     func buttonTitleString() -> String {
-        
+
         return String(format: "%@ (%3.2f%%)", self.breed, self.probability * 100)
     }
 }

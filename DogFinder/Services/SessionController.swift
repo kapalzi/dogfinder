@@ -9,15 +9,15 @@
 import Foundation
 
 class SessionController {
-    
+
     public static let sharedInstance = SessionController()
     public var token: String! = ""
     public var currentUser: User!
-    
+
     func logout() {
-        
+
         self.currentUser = nil
         self.token = nil
     }
-    
+
 }

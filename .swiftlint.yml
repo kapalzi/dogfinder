@@ -1,0 +1,14 @@
+included:
+  - DogFinder
+
+excluded:
+  - Pods
+  - DogFinderAPI
+
+disabled_rules: # rule identifiers to exclude from running
+  - identifier_name
+  - nesting
+  - function_parameter_count
+  - line_length
+
+force_cast: warning 

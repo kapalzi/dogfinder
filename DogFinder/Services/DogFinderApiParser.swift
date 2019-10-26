@@ -12,41 +12,41 @@ import Alamofire
 
 class DogFinderApiParser {
 
-    public class func parseJsonWithDogs(_ json:JSON, completionHandler:@escaping ((_:[Dog])->Void)) {
+    public class func parseJsonWithDogs(_ json: JSON, completionHandler:@escaping ((_:[Dog]) -> Void)) {
 
         var dogRecords = [Dog]()
-        
+
         for subJson in json.arrayValue {
             if let dogRecord = Dog.fromJson(json: subJson) {
                 dogRecords.append(dogRecord)
             }
         }
-        
+
         DispatchQueue.main.async {
             completionHandler(dogRecords)
             return
         }
     }
-    
-    public class func parseJsonWithUser(_ json:JSON, completionHandler:@escaping ((_:User)->Void)) {
-        
+
+    public class func parseJsonWithUser(_ json: JSON, completionHandler:@escaping ((_:User) -> Void)) {
+
         if let user = User.fromJson(json: json) {
             completionHandler(user)
             return
         }
-        
+
     }
-    
-    public class func parseJsonWithDogPhotos(_ json:JSON, completionHandler:@escaping ((_:[DogPhoto])->Void)) {
-        
+
+    public class func parseJsonWithDogPhotos(_ json: JSON, completionHandler:@escaping ((_:[DogPhoto]) -> Void)) {
+
         var dogPhotoRecords = [DogPhoto]()
-        
+
         for subJson in json.arrayValue {
             if let dogPhotoRecord = DogPhoto.fromJson(json: subJson) {
                 dogPhotoRecords.append(dogPhotoRecord)
             }
         }
-        
+
         DispatchQueue.main.async {
             completionHandler(dogPhotoRecords)
             return

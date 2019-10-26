@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIView{
-    
-    func dropShadow(backgroundColor:UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
+extension UIView {
+
+    func dropShadow(backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = 15
         self.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -20,13 +20,11 @@ extension UIView{
     }
 }
 
-extension Date
-{
-    func toString( dateFormat format  : String = "dd.MM.YYYY HH:mm" ) -> String
-    {
+extension Date {
+    func toString( dateFormat format: String = "dd.MM.YYYY HH:mm" ) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
-    
+
 }

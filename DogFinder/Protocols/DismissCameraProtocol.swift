@@ -9,10 +9,9 @@
 import Foundation
 
 protocol DismissCameraProtocol {
-    
-    
+
 }
 
 extension DismissCameraProtocol {
-    
+
 }
