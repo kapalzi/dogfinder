@@ -80,8 +80,8 @@ class DogFinderApi {
             }
         }
     }
-    
-    public func getFilteredSpottedDogs(areSpotted:Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+
+    public func getFilteredSpottedDogs(areSpotted: Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
         let params = ["isSpotted": areSpotted] as Parameters
         self.performRequest(method: .post, url: self.createRequestPath(endpoint: .filteredSpottedDogs), parameters: params, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
