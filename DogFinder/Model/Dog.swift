@@ -116,9 +116,9 @@ class Dog: Hashable {
         return serializedObject
     }
 
-    public func getString(forSize size: DogsSize) -> String {
+    public func getStringForSize() -> String {
 
-        switch size {
+        switch self.size {
         case .small:
             return "Small"
         case .medium:
@@ -130,7 +130,7 @@ class Dog: Hashable {
         }
     }
 
-    public func getString(forGender gender: DogsGender) -> String {
+    public func getStringForGender() -> String {
 
         switch gender {
         case .male:
@@ -139,6 +139,15 @@ class Dog: Hashable {
             return "Female"
         case .unknown:
             return "Unknown"
+        }
+    }
+
+    public func getStringForCategory() -> String {
+
+        if self.isSpotted == true {
+            return "Spotted"
+        } else {
+            return "Missing"
         }
     }
 }

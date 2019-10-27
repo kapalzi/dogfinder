@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, UITextViewDelegate {
+class FormViewController: BaseDetailsViewController, UITextViewDelegate {
 
     private var viewModel: FormViewModel!
     @IBOutlet var breedBtn: UIButton!
@@ -17,13 +17,6 @@ class FormViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet var colorBtn: UIButton!
     @IBOutlet var genderBtn: UIButton!
     @IBOutlet var depictionTextVIew: UITextView!
-
-    @IBOutlet var breedView: UIView!
-    @IBOutlet var categoryView: UIView!
-    @IBOutlet var sizeView: UIView!
-    @IBOutlet var colorView: UIView!
-    @IBOutlet var genderView: UIView!
-    @IBOutlet var depictionView: UIView!
     @IBOutlet var saveView: UIView!
 
     override func viewDidLoad() {
@@ -37,27 +30,16 @@ class FormViewController: UITableViewController, UITextViewDelegate {
         self.viewModel.initLocationManager()
     }
 
-    private func initControls() {
+    override func initControls() {
 
+        super.initControls()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Cancel",
             style: .plain,
             target: self,
             action: #selector(self.cancelClicked(_:)))
 
-        self.breedView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-        self.categoryView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-        self.sizeView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-        self.colorView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-        self.genderView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-        self.depictionView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
         self.saveView.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
-
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
-        return self.view.bounds.width
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
