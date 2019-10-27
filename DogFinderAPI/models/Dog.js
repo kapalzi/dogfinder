@@ -6,7 +6,12 @@ const DogSchema = mongoose.Schema({
     longitude: Number,
     seenDate: Date,
     photoName: String,
-    user: String
+    user: String,
+    isSpotted: Boolean,
+    size: Number,
+    color: String,
+    gender: Number,
+    depiction: String
 })
 
 module.exports = mongoose.model('Dogs', DogSchema)

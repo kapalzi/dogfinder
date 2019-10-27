@@ -17,12 +17,12 @@ router.get('/', auth, async (req, res) => {
 })
 
 //Get filtered dog
-router.get('/photo/:id', async (req, res) => {
+router.post('/filtered/spotted', auth, async (req, res) => {
     console.log(req.params.id)
     try {
         const dogs = await Dog.find()
         res.json(
-            dogs.filter(dogs => dogs._id === req.params.id)
+            dogs.filter(dogs => dogs.isSpotted === req.params.isSpotted)
         )
     } catch (err) {
         res.json({ message: err })
@@ -39,6 +39,11 @@ router.post('/', async (req, res) => {
         seenDate: Date.now(),
         user: req.body.user,
         photoName: nameOfPhoto,
+        isSpotted: req.body.isSpotted,
+        size: req.body.size,
+        color: req.body.color,
+        gender: req.body.gender,
+        depiction: req.body.depiction
     })
 
     var base64Data = req.body.photo.replace(/^data:image\/jpeg;base64,/, "");

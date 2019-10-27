@@ -20,6 +20,7 @@ class DogFinderApi {
     private enum Endpoint: String {
         case getAllDogs = "/api/dogs"
         case getPhotos = "/api/dogs/photos"
+        case filteredSpottedDogs = "/api/dogs/filtered/spotted"
         case login = "/api/users/login"
         case register = "/api/users/register"
     }
@@ -65,10 +66,25 @@ class DogFinderApi {
         }
     }
 
-    //Get all dogs
     public func getAllDogs(completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
         self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+            switch response.result {
+            case .success(let responseObject):
+                let json = JSON(responseObject)
+
+                DogFinderApiParser.parseJsonWithDogs(json, completionHandler: completionHandler)
+
+            case .failure:
+                errorHandler(response.error!)
+            }
+        }
+    }
+    
+    public func getFilteredSpottedDogs(areSpotted:Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+
+        let params = ["isSpotted": areSpotted] as Parameters
+        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .filteredSpottedDogs), parameters: params, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)

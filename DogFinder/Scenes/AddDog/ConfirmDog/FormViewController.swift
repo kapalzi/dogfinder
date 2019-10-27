@@ -130,21 +130,47 @@ class FormViewController: UITableViewController, UITextViewDelegate {
     private func showCategoriesAlert() {
 
         let ac = UIAlertController(title: "Select Category", message: nil, preferredStyle: .alert)
-        self.addActionsFrom(stringArray: self.viewModel.categories, ac: ac, button: self.categoryBtn)
+
+        for (index, element) in self.viewModel.categories.enumerated() {
+
+           ac.addAction(UIAlertAction(title: element, style: .default, handler: { (_) in
+               self.viewModel.selectCategory(index) {
+                   self.categoryBtn.setTitle(element, for: .normal)
+               }
+           }))
+       }
         self.startAlertWithCancel(ac: ac)
     }
 
     private func showSizesAlert() {
 
         let ac = UIAlertController(title: "Select Size", message: nil, preferredStyle: .alert)
-        self.addActionsFrom(stringArray: self.viewModel.sizes, ac: ac, button: self.sizeBtn)
+
+         for (index, element) in self.viewModel.sizes.enumerated() {
+
+            ac.addAction(UIAlertAction(title: element, style: .default, handler: { (_) in
+                self.viewModel.selectSize(index) {
+                    self.sizeBtn.setTitle(element, for: .normal)
+                }
+            }))
+        }
+
         self.startAlertWithCancel(ac: ac)
     }
 
     private func showGendersAlert() {
 
         let ac = UIAlertController(title: "Select Gender", message: nil, preferredStyle: .alert)
-        self.addActionsFrom(stringArray: self.viewModel.genders, ac: ac, button: self.genderBtn)
+
+         for (index, element) in self.viewModel.genders.enumerated() {
+
+            ac.addAction(UIAlertAction(title: element, style: .default, handler: { (_) in
+                self.viewModel.selectGender(index) {
+                    self.genderBtn.setTitle(element, for: .normal)
+                }
+            }))
+        }
+
         self.startAlertWithCancel(ac: ac)
     }
 
@@ -164,18 +190,6 @@ class FormViewController: UITableViewController, UITextViewDelegate {
         ac.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
         self.startAlert(ac: ac)
-    }
-
-    private func addActionsFrom(stringArray: [String], ac: UIAlertController, button: UIButton) {
-
-        for (index, element) in stringArray.enumerated() {
-
-                   ac.addAction(UIAlertAction(title: element, style: .default, handler: { (_) in
-                       self.viewModel.selectCategory(index) {
-                           button.setTitle(element, for: .normal)
-                       }
-                   }))
-               }
     }
 
     private func startAlertWithCancel(ac: UIAlertController) {
@@ -219,7 +233,7 @@ class FormViewController: UITableViewController, UITextViewDelegate {
         self.viewModel.saveDog(completion: { (message) in
             self.showMessageAlert(withMessage: message)
         }) { (errorMessage) in
-            self.showMessageAlert(withMessage: errorMessage)
+            self.showErrorAlert(withMessage: errorMessage)
         }
     }
 

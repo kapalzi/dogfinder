@@ -108,9 +108,9 @@ class Dog: Hashable {
         serializedObject[Dog.kPhoto] = self.photo
         serializedObject[Dog.kUser] = self.user
         serializedObject[Dog.kIsSpotted] = self.isSpotted
-        serializedObject[Dog.kSize] = self.size
+        serializedObject[Dog.kSize] = self.size.rawValue
         serializedObject[Dog.kColor] = self.color
-        serializedObject[Dog.kGender] = self.gender
+        serializedObject[Dog.kGender] = self.gender.rawValue
         serializedObject[Dog.kDepiction] = self.depiction
 
         return serializedObject

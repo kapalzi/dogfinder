@@ -26,7 +26,17 @@ class SearchDogsViewModel {
         }) { (error) in
             print(error)
         }
-
+    }
+    
+    func downloadDogsAreSpotted(areSpotted: Bool) {
+        
+        DogFinderApi.sharedInstance.getFilteredSpottedDogs(areSpotted: areSpotted, completionHandler: { (dogs) in
+            guard let dogs = dogs else { return }
+            self.dogs = dogs
+            self.delegate?.reloadTableView()
+        }, errorHandler: { (error) in
+            print(error)
+        })   
     }
 
     func addNewDogs(newDogs: [Dog]) {
