@@ -19,12 +19,3 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
 }
-
-extension Date {
-    func toString( dateFormat format: String = "dd.MM.YYYY HH:mm" ) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-
-}

@@ -238,7 +238,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
 
     func presentConfirmDog(results: [DogPrediction]) {
 
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmDogViewController") as! ConfirmDogViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "FormViewController") as! FormViewController
         vc.initViewModel(predictions: results, dogPhoto: self.capturedImage!)
 
         self.navigationController?.show(self.createNavController(rootViewController: vc), sender: nil)

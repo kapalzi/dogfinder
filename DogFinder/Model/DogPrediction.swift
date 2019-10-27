@@ -15,6 +15,9 @@ struct DogPrediction {
 
     func buttonTitleString() -> String {
 
+        if self.breed == "Mixed-breed" {
+            return self.breed
+        }
         return String(format: "%@ (%3.2f%%)", self.breed, self.probability * 100)
     }
 }
