@@ -28,6 +28,9 @@
 		E2A8F2A62365949A0022459A /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2A52365949A0022459A /* FormViewController.swift */; };
 		E2A8F2A82365A92A0022459A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2A72365A92A0022459A /* Date+Extension.swift */; };
 		E2A8F2AA2365A9720022459A /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2A92365A9720022459A /* UIAlertController+Extension.swift */; };
+		E2A8F2AD2365FEE70022459A /* DogDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2AC2365FEE70022459A /* DogDetailsViewController.swift */; };
+		E2A8F2AF2365FEF60022459A /* DogDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2AE2365FEF60022459A /* DogDetailsViewModel.swift */; };
+		E2A8F2B1236603F80022459A /* BaseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8F2B0236603F80022459A /* BaseDetailsViewController.swift */; };
 		E2B7093122E34D1200FC7659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7093022E34D1200FC7659 /* AppDelegate.swift */; };
 		E2B7093622E34D1200FC7659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B7093422E34D1200FC7659 /* Main.storyboard */; };
 		E2B7093822E34D1300FC7659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B7093722E34D1300FC7659 /* Assets.xcassets */; };
@@ -85,6 +88,9 @@
 		E2A8F2A52365949A0022459A /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		E2A8F2A72365A92A0022459A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		E2A8F2A92365A9720022459A /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		E2A8F2AC2365FEE70022459A /* DogDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsViewController.swift; sourceTree = "<group>"; };
+		E2A8F2AE2365FEF60022459A /* DogDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsViewModel.swift; sourceTree = "<group>"; };
+		E2A8F2B0236603F80022459A /* BaseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetailsViewController.swift; sourceTree = "<group>"; };
 		E2B7092D22E34D1200FC7659 /* DogFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B7093022E34D1200FC7659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B7093522E34D1200FC7659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				E2662CE4235261F100A39D8E /* BaseViewController.swift */,
+				E2A8F2B0236603F80022459A /* BaseDetailsViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -227,6 +234,15 @@
 				E2662CE82352709500A39D8E /* RegisterViewModel.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		E2A8F2AB2365FEC20022459A /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				E2A8F2AC2365FEE70022459A /* DogDetailsViewController.swift */,
+				E2A8F2AE2365FEF60022459A /* DogDetailsViewModel.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		E2B7092422E34D1200FC7659 = {
@@ -353,6 +369,7 @@
 				E2B7096422E3629B00FC7659 /* SearchDogsViewModel.swift */,
 				E2B7096722E4B14400FC7659 /* Table */,
 				E2B7096822E4B14F00FC7659 /* Map */,
+				E2A8F2AB2365FEC20022459A /* Details */,
 			);
 			path = SearchDogs;
 			sourceTree = "<group>";
@@ -618,7 +635,10 @@
 				E2C06CC022FD9D5600759646 /* UIImage+Extension.swift in Sources */,
 				E24C0FB3230A9FBC00F183DB /* UIView+Extension.swift in Sources */,
 				E285DF8422ED76ED00A39F47 /* DogFinderApi.swift in Sources */,
+				E2A8F2B1236603F80022459A /* BaseDetailsViewController.swift in Sources */,
+				E2A8F2AD2365FEE70022459A /* DogDetailsViewController.swift in Sources */,
 				E2B7096122E3627F00FC7659 /* PhotographDogViewModel.swift in Sources */,
+				E2A8F2AF2365FEF60022459A /* DogDetailsViewModel.swift in Sources */,
 				E2B7093122E34D1200FC7659 /* AppDelegate.swift in Sources */,
 				E2B7095B22E35E7100FC7659 /* Dog.swift in Sources */,
 				E2B7095F22E3627100FC7659 /* PhotographDogViewController.swift in Sources */,

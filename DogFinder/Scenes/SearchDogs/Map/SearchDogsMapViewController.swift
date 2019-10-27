@@ -91,7 +91,6 @@ extension SearchDogsMapViewController: MKMapViewDelegate {
 //        self.search()
 
         self.viewModel.downloadAllDogs()
-
         for dog in self.viewModel.dogs {
 
             let annatation = MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: dog.latitude)!, longitude: CLLocationDegrees(dog.longitude)))

@@ -46,6 +46,18 @@ extension SearchDogsTableViewController: UITableViewDataSource {
 
 extension SearchDogsTableViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        self.presentDogDetails(dog: self.viewModel.dogs[indexPath.row])
+    }
+
+    private func presentDogDetails(dog: Dog) {
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DogDetailsViewController") as! DogDetailsViewController
+        vc.initViewModel(dog: dog)
+
+        self.navigationController?.show(vc, sender: nil)
+    }
 }
 
 extension SearchDogsTableViewController: SearchDogsViewModelDelegate {
