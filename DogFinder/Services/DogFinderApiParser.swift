@@ -37,20 +37,4 @@ class DogFinderApiParser {
 
     }
 
-    public class func parseJsonWithDogPhotos(_ json: JSON, completionHandler:@escaping ((_:[DogPhoto]) -> Void)) {
-
-        var dogPhotoRecords = [DogPhoto]()
-
-        for subJson in json.arrayValue {
-            if let dogPhotoRecord = DogPhoto.fromJson(json: subJson) {
-                dogPhotoRecords.append(dogPhotoRecord)
-            }
-        }
-
-        DispatchQueue.main.async {
-            completionHandler(dogPhotoRecords)
-            return
-        }
-    }
-
 }
