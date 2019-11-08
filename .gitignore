@@ -68,4 +68,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 DogFinderApi/node_modules
+DogFinderApi/data/img
 .DS_Store
