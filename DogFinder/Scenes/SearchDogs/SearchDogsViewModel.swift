@@ -42,22 +42,4 @@ class SearchDogsViewModel {
         self.delegate?.reloadTableView()
     }
 
-    func downloadDogsAreSpotted(areSpotted: Bool) {
-
-        DogFinderApi.sharedInstance.getFilteredSpottedDogs(areSpotted: areSpotted, completionHandler: { (dogs) in
-            guard let dogs = dogs else { return }
-            self.dogs = dogs
-            self.delegate?.reloadTableView()
-        }, errorHandler: { (error) in
-            print(error)
-        })
-    }
-
-    func addNewDogs(newDogs: [Dog]) {
-
-        let dogsToAdd = Set(self.dogs).symmetricDifference(Set(newDogs))
-        dogsToAdd.forEach { self.dogs.append($0) }
-        self.delegate?.reloadTableView()
-    }
-
 }

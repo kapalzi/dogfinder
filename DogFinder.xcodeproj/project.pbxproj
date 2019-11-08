@@ -44,6 +44,7 @@
 		E2B7096E22E4B1AE00FC7659 /* SearchDogsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7096D22E4B1AE00FC7659 /* SearchDogsMapViewController.swift */; };
 		E2B7097322E4F98D00FC7659 /* SearchDogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */; };
 		E2B7097522E50FF600FC7659 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7097422E50FF600FC7659 /* User.swift */; };
+		E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */; };
 		E2BD6D5222FAE6AC00FA4569 /* SimpleDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */; };
 		E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */; };
 		E2C06CBA22FD9BE400759646 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB822FD9BE400759646 /* Resnet50.mlmodel */; };
@@ -107,6 +108,7 @@
 		E2B7096D22E4B1AE00FC7659 /* SearchDogsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsMapViewController.swift; sourceTree = "<group>"; };
 		E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsTableViewCell.swift; sourceTree = "<group>"; };
 		E2B7097422E50FF600FC7659 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsViewModelTests.swift; sourceTree = "<group>"; };
 		E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDateFormatter.swift; sourceTree = "<group>"; };
 		E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StudentDogModel.mlmodel; sourceTree = "<group>"; };
 		E2C06CB822FD9BE400759646 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B7094522E34D1300FC7659 /* DogFinderTests.swift */,
+				E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */,
 				E2B7094722E34D1300FC7659 /* Info.plist */,
 			);
 			path = DogFinderTests;
@@ -646,6 +649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2B7094622E34D1300FC7659 /* DogFinderTests.swift in Sources */,
+				E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,7 +807,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZVAPY9CY9V;
 				INFOPLIST_FILE = "DogFinder/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -823,7 +827,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZVAPY9CY9V;
 				INFOPLIST_FILE = "DogFinder/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
