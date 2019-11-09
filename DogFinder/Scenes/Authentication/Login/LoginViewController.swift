@@ -14,7 +14,7 @@ class LoginViewController: BaseViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var loginBtn: UIButton!
 
-    private let viewModel: LoginViewModel = LoginViewModel()
+    private let viewModel: LoginViewModel = LoginViewModel(api: DogFinderApi.sharedInstance)
 
     override func viewDidLoad() {
 

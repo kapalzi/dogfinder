@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RegisterViewModel {
+class RegisterViewModel: BaseViewModel {
 
     func register(username: String?, password: String?, email: String?, completion: @escaping (() -> Void)) {
 
@@ -16,7 +16,7 @@ class RegisterViewModel {
         guard let password = password else { return }
         guard let email = email else { return }
 
-        DogFinderApi.sharedInstance.register(username: username, password: password, email: email, completionHandler: completion) { (error) in
+        self.api.register(username: username, password: password, email: email, completionHandler: completion) { (error) in
             print(error)
         }
     }

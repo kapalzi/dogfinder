@@ -10,7 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class DogFinderApi {
+class DogFinderApi: DogFinderApiProvider {
+
     public static let sharedInstance = DogFinderApi()
 
 //    private let baseURL = "http://192.168.1.160:5000" //biuro

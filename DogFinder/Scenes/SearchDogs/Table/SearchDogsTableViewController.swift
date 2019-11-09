@@ -13,7 +13,7 @@ class SearchDogsTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: SearchDogsViewModel = SearchDogsViewModel()
+    var viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
 
 }
 

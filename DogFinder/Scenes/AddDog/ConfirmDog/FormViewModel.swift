@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class FormViewModel: NSObject, CurrentLocationProtocol {
+class FormViewModel: BaseViewModel, CurrentLocationProtocol {
 
     var locationManager: CLLocationManager?
     var lastLocation: CLLocation?
@@ -27,7 +27,7 @@ class FormViewModel: NSObject, CurrentLocationProtocol {
     private var gender: DogsGender?
     private var depiction: String?
 
-    init(dogPredictions: [DogPrediction], dogPhoto: UIImage) {
+    init(api: DogFinderApiProvider, dogPredictions: [DogPrediction], dogPhoto: UIImage) {
 
         self.dogPredictions = dogPredictions
         self.dogPredictions.append(DogPrediction(breed: "Mixed-breed", probability: 0.5))
@@ -35,6 +35,8 @@ class FormViewModel: NSObject, CurrentLocationProtocol {
         self.categories = ["Missing", "Spotted"]
         self.sizes = ["Small", "Medium", "Big", "Large"]
         self.genders = ["Male", "Female", "Unknown"]
+
+        super.init(api: api)
     }
 
     func selectBreed(_ breedNumber: Int, completion: (() -> Void)) {
@@ -114,7 +116,7 @@ class FormViewModel: NSObject, CurrentLocationProtocol {
 
         let dog = Dog(breed: breed, longitude: coordinates.longitude, latitude: coordinates.latitude, seenDate: Date(), photo: dogImageBase ?? "", user: SessionController.sharedInstance.currentUser.id, isSpotted: isSpotted, size: size, color: color, gender: gender, depiction: depiction ?? "")
 
-        DogFinderApi.sharedInstance.addDog(dog, completionHandler: completion, errorHandler: error)
+        self.api.addDog(dog, completionHandler: completion, errorHandler: error)
     }
 }
 

@@ -16,11 +16,16 @@ class SearchDogsViewModel {
 
     var dogs: [Dog] = [Dog]()
     var allDogs: [Dog] = [Dog]()
+    let api: DogFinderApiProvider
     weak var delegate: SearchDogsViewModelDelegate?
+
+    init(api: DogFinderApiProvider) {
+        self.api = api
+    }
 
     func downloadAllDogs() {
 
-        DogFinderApi.sharedInstance.getAllDogs(completionHandler: { (dogs) in
+        api.getAllDogs(completionHandler: { (dogs) in
             guard let dogs = dogs else { return }
             self.allDogs = dogs
             self.dogs = dogs.filter { $0.isSpotted }

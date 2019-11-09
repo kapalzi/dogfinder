@@ -15,7 +15,7 @@ class SearchDogsViewController: UIViewController {
     @IBOutlet var spottedBtn: UIButton!
     @IBOutlet var missingBtn: UIButton!
 
-    private let viewModel: SearchDogsViewModel = SearchDogsViewModel()
+    private let viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
 
     override func viewDidLoad() {
         self.showMap()

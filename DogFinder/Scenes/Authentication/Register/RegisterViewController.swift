@@ -15,7 +15,7 @@ class RegisterViewController: BaseViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signupBtn: UIButton!
 
-    private let viewModel: RegisterViewModel = RegisterViewModel()
+    private let viewModel: RegisterViewModel = RegisterViewModel(api: DogFinderApi.sharedInstance)
 
     override func viewDidLoad() {
 

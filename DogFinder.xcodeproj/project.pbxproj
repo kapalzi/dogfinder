@@ -34,7 +34,6 @@
 		E2B7093622E34D1200FC7659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B7093422E34D1200FC7659 /* Main.storyboard */; };
 		E2B7093822E34D1300FC7659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B7093722E34D1300FC7659 /* Assets.xcassets */; };
 		E2B7093B22E34D1300FC7659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B7093922E34D1300FC7659 /* LaunchScreen.storyboard */; };
-		E2B7094622E34D1300FC7659 /* DogFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7094522E34D1300FC7659 /* DogFinderTests.swift */; };
 		E2B7095B22E35E7100FC7659 /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7095A22E35E7100FC7659 /* Dog.swift */; };
 		E2B7095F22E3627100FC7659 /* PhotographDogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7095E22E3627100FC7659 /* PhotographDogViewController.swift */; };
 		E2B7096122E3627F00FC7659 /* PhotographDogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7096022E3627F00FC7659 /* PhotographDogViewModel.swift */; };
@@ -44,6 +43,12 @@
 		E2B7096E22E4B1AE00FC7659 /* SearchDogsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7096D22E4B1AE00FC7659 /* SearchDogsMapViewController.swift */; };
 		E2B7097322E4F98D00FC7659 /* SearchDogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */; };
 		E2B7097522E50FF600FC7659 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7097422E50FF600FC7659 /* User.swift */; };
+		E2B735762376E12200C759C0 /* DogFinderApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B735752376E12200C759C0 /* DogFinderApiProvider.swift */; };
+		E2B735782376E22500C759C0 /* MockDogFinderApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B735772376E22500C759C0 /* MockDogFinderApi.swift */; };
+		E2B7357A2376E75700C759C0 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B735792376E75700C759C0 /* LoginViewModelTests.swift */; };
+		E2B7357C2376E79A00C759C0 /* RegisterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357B2376E79A00C759C0 /* RegisterViewModelTests.swift */; };
+		E2B7357E2376E7C500C759C0 /* FormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357D2376E7C500C759C0 /* FormViewModelTests.swift */; };
+		E2B735802376EA9C00C759C0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357F2376EA9C00C759C0 /* BaseViewModel.swift */; };
 		E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */; };
 		E2BD6D5222FAE6AC00FA4569 /* SimpleDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */; };
 		E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */; };
@@ -97,7 +102,6 @@
 		E2B7093A22E34D1300FC7659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2B7093C22E34D1300FC7659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2B7094122E34D1300FC7659 /* DogFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2B7094522E34D1300FC7659 /* DogFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFinderTests.swift; sourceTree = "<group>"; };
 		E2B7094722E34D1300FC7659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2B7095A22E35E7100FC7659 /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
 		E2B7095E22E3627100FC7659 /* PhotographDogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotographDogViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +112,12 @@
 		E2B7096D22E4B1AE00FC7659 /* SearchDogsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsMapViewController.swift; sourceTree = "<group>"; };
 		E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsTableViewCell.swift; sourceTree = "<group>"; };
 		E2B7097422E50FF600FC7659 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E2B735752376E12200C759C0 /* DogFinderApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFinderApiProvider.swift; sourceTree = "<group>"; };
+		E2B735772376E22500C759C0 /* MockDogFinderApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDogFinderApi.swift; sourceTree = "<group>"; };
+		E2B735792376E75700C759C0 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		E2B7357B2376E79A00C759C0 /* RegisterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModelTests.swift; sourceTree = "<group>"; };
+		E2B7357D2376E7C500C759C0 /* FormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModelTests.swift; sourceTree = "<group>"; };
+		E2B7357F2376EA9C00C759C0 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsViewModelTests.swift; sourceTree = "<group>"; };
 		E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDateFormatter.swift; sourceTree = "<group>"; };
 		E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StudentDogModel.mlmodel; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				E2426A022306E65B00DCF6F5 /* CurrentLocationProtocol.swift */,
+				E2B735752376E12200C759C0 /* DogFinderApiProvider.swift */,
 				E2662CE1235260C700A39D8E /* DismissCameraProtocol.swift */,
 			);
 			path = Protocols;
@@ -187,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				E2662CE4235261F100A39D8E /* BaseViewController.swift */,
+				E2B7357F2376EA9C00C759C0 /* BaseViewModel.swift */,
 				E2A8F2B0236603F80022459A /* BaseDetailsViewController.swift */,
 			);
 			path = Base;
@@ -284,8 +296,11 @@
 		E2B7094422E34D1300FC7659 /* DogFinderTests */ = {
 			isa = PBXGroup;
 			children = (
-				E2B7094522E34D1300FC7659 /* DogFinderTests.swift */,
+				E2B735772376E22500C759C0 /* MockDogFinderApi.swift */,
 				E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */,
+				E2B735792376E75700C759C0 /* LoginViewModelTests.swift */,
+				E2B7357B2376E79A00C759C0 /* RegisterViewModelTests.swift */,
+				E2B7357D2376E7C500C759C0 /* FormViewModelTests.swift */,
 				E2B7094722E34D1300FC7659 /* Info.plist */,
 			);
 			path = DogFinderTests;
@@ -617,6 +632,7 @@
 				E2426A032306E65B00DCF6F5 /* CurrentLocationProtocol.swift in Sources */,
 				E2A8F2A82365A92A0022459A /* Date+Extension.swift in Sources */,
 				E2B7096E22E4B1AE00FC7659 /* SearchDogsMapViewController.swift in Sources */,
+				E2B735762376E12200C759C0 /* DogFinderApiProvider.swift in Sources */,
 				E28DBD11230EC006002D0480 /* LoginViewModel.swift in Sources */,
 				E2662CE2235260C700A39D8E /* DismissCameraProtocol.swift in Sources */,
 				E2A8F2A62365949A0022459A /* FormViewController.swift in Sources */,
@@ -637,6 +653,7 @@
 				E2A8F2B1236603F80022459A /* BaseDetailsViewController.swift in Sources */,
 				E2A8F2AD2365FEE70022459A /* DogDetailsViewController.swift in Sources */,
 				E2B7096122E3627F00FC7659 /* PhotographDogViewModel.swift in Sources */,
+				E2B735802376EA9C00C759C0 /* BaseViewModel.swift in Sources */,
 				E2A8F2AF2365FEF60022459A /* DogDetailsViewModel.swift in Sources */,
 				E2B7093122E34D1200FC7659 /* AppDelegate.swift in Sources */,
 				E2B7095B22E35E7100FC7659 /* Dog.swift in Sources */,
@@ -648,7 +665,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2B7094622E34D1300FC7659 /* DogFinderTests.swift in Sources */,
+				E2B7357E2376E7C500C759C0 /* FormViewModelTests.swift in Sources */,
+				E2B7357A2376E75700C759C0 /* LoginViewModelTests.swift in Sources */,
+				E2B7357C2376E79A00C759C0 /* RegisterViewModelTests.swift in Sources */,
+				E2B735782376E22500C759C0 /* MockDogFinderApi.swift in Sources */,
 				E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

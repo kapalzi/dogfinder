@@ -26,7 +26,7 @@ class FormViewController: BaseDetailsViewController, UITextViewDelegate {
 
     func initViewModel(predictions: [DogPrediction], dogPhoto: UIImage) {
 
-        self.viewModel = FormViewModel(dogPredictions: predictions, dogPhoto: dogPhoto)
+        self.viewModel = FormViewModel(api: DogFinderApi.sharedInstance, dogPredictions: predictions, dogPhoto: dogPhoto)
         self.viewModel.initLocationManager()
     }
 

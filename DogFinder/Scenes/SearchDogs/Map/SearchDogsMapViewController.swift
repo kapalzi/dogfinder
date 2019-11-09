@@ -16,7 +16,7 @@ class SearchDogsMapViewController: UIViewController, CurrentLocationProtocol {
     var locationManager: CLLocationManager?
     var lastLocation: CLLocation?
     var annotation: MapAnnotation?
-    var viewModel: SearchDogsViewModel = SearchDogsViewModel()
+    var viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

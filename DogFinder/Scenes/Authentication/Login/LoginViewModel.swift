@@ -8,14 +8,14 @@
 
 import Foundation
 
-class LoginViewModel {
+class LoginViewModel: BaseViewModel {
 
     func login(username: String?, password: String?, completion: @escaping (() -> Void)) {
 
         guard let username = username else { return }
         guard let password = password else { return }
 
-        DogFinderApi.sharedInstance.login(username: username, password: password, completionHandler: completion) { (error) in
+        self.api.login(username: username, password: password, completionHandler: completion) { (error) in
             print(error)
         }
     }
