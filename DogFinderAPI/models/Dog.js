@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const DogSchema = mongoose.Schema({
     breed: String,
@@ -14,4 +15,5 @@ const DogSchema = mongoose.Schema({
     depiction: String
 })
 
+DogSchema.plugin(mongoosePaginate)
 module.exports = mongoose.model('Dogs', DogSchema)

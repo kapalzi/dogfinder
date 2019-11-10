@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T7v-yk-ER4">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -747,7 +748,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="284"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5pr-qa-QXF">
-                                        <rect key="frame" x="19" y="0.0" width="337.50000000000011" height="284"/>
+                                        <rect key="frame" x="19" y="0.0" width="337.5" height="284"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.19608062505722046" green="0.19607549905776978" blue="0.19607651233673096" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -852,7 +853,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="7mj-GS-apK">
-                                <rect key="frame" x="0.0" y="453" width="375.00000000000011" height="214"/>
+                                <rect key="frame" x="0.0" y="453" width="375" height="214"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.19605761766433716" green="0.19609168171882629" blue="0.19605019688606262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -996,6 +997,28 @@
                                             <outlet property="dogImageView" destination="XU4-rw-MuS" id="jEV-o8-JhZ"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="LoadMoreTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" id="gbp-HK-4Vw" customClass="LoadMoreTableViewCell" customModule="DogFinder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gbp-HK-4Vw" id="qdY-JK-CmB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bZd-Vc-pUe">
+                                                    <rect key="frame" x="169" y="16.5" width="37" height="37"/>
+                                                    <color key="color" red="0.41782790419999999" green="0.69296497109999999" blue="0.57538604739999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bZd-Vc-pUe" firstAttribute="centerY" secondItem="qdY-JK-CmB" secondAttribute="centerY" id="O16-Ly-jG4"/>
+                                                <constraint firstItem="bZd-Vc-pUe" firstAttribute="centerX" secondItem="qdY-JK-CmB" secondAttribute="centerX" id="qpR-49-G70"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="loader" destination="bZd-Vc-pUe" id="aMO-iu-yro"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>
@@ -1094,7 +1117,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Efj-sw-F0V">
-                                <rect key="frame" x="0.0" y="445" width="375.00000000000011" height="222"/>
+                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your email..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JeP-gG-sUU" userLabel="Your email...">
                                 <rect key="frame" x="30" y="104" width="315" height="60"/>

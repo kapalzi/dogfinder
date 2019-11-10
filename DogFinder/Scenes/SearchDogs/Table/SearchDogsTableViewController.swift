@@ -15,15 +15,38 @@ class SearchDogsTableViewController: UIViewController {
 
     var viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
 
+    private func isLastCell(indexPath: IndexPath) -> Bool {
+
+        if indexPath.row == self.viewModel.dogs.count {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    private func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
+
+        let dog = self.viewModel.dogs[indexPath.row]
+        cell.breedLbl.text = dog.breed
+        cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
+        cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
+    }
+
 }
 
 extension SearchDogsTableViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.viewModel.dogs.count
+        return self.viewModel.dogs.count > 0 ? self.viewModel.dogs.count + 1 : 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if isLastCell(indexPath: indexPath) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
+            return cell
+        }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchDogsTableViewCell",
                                                  for: indexPath) as? SearchDogsTableViewCell ??
@@ -34,21 +57,23 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         return cell
     }
 
-    func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
 
-        let dog = self.viewModel.dogs[indexPath.row]
-        cell.breedLbl.text = dog.breed
-        cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
-        cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
+            self.viewModel.downloadNextDogs(areSpotted: self.viewModel.areSpotted) {
+                self.tableView.reloadData()
+            }
+        }
     }
-
 }
 
 extension SearchDogsTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        self.presentDogDetails(dog: self.viewModel.dogs[indexPath.row])
+        if !self.isLastCell(indexPath: indexPath) {
+            self.presentDogDetails(dog: self.viewModel.dogs[indexPath.row])
+        }
     }
 
     private func presentDogDetails(dog: Dog) {

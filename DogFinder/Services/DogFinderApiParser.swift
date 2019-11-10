@@ -16,7 +16,7 @@ class DogFinderApiParser {
 
         var dogRecords = [Dog]()
 
-        for subJson in json.arrayValue {
+        for subJson in json["docs"].arrayValue {
             if let dogRecord = Dog.fromJson(json: subJson) {
                 dogRecords.append(dogRecord)
             }

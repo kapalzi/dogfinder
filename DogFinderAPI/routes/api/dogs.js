@@ -7,14 +7,37 @@ const uuidv4 = require('uuid/v4');
 const auth = require("../../middleware/auth");
 
 //Get All
+// router.get('/', async (req, res) => {
+//     try {
+//         const dogs = await Dog.find()
+//         res.json(dogs)
+//     } catch(err) {
+//         res.json({ message: err })
+//     }
+// })
+
+//Get all at page
 router.get('/', async (req, res) => {
-    try {
-        const dogs = await Dog.find()
-        res.json(dogs)
-    } catch(err) {
-        res.json({ message: err })
+    const options = {
+        page: req.query.page,
+        limit: 10,
+        sort: { seenDate: -1 }
     }
+
+    Dog.paginate({}, options, function(err, result){
+                res.json(result)
+            })
 })
+
+
+
+// try {
+//     await Dog.paginate({}, options, function(err, result){
+//         console.log("result")
+//         res.json(result)
+//     } )
+
+
 
 //Add new
 router.post('/', async (req, res) => {

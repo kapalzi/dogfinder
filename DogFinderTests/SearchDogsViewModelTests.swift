@@ -30,9 +30,11 @@ class SearchDogsViewModelTests: XCTestCase {
     
     func testDownloadAllDogs() {
         
-        self.searchDogsViewModel.downloadAllDogs()
+        self.searchDogsViewModel.downloadNextDogs {
+            XCTAssert(self.searchDogsViewModel.allDogs.count == 3)
+        }
         
-        XCTAssert(self.searchDogsViewModel.allDogs.count == 3)
+        
     }
 
     func testShowSpotted() {

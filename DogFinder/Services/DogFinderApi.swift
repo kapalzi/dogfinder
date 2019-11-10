@@ -66,9 +66,9 @@ class DogFinderApi: DogFinderApiProvider {
         }
     }
 
-    public func getAllDogs(completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+    public func getNextDogs(pageNumber: Int, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)

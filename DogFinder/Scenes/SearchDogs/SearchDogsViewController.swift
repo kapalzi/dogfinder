@@ -31,7 +31,9 @@ class SearchDogsViewController: UIViewController {
 
         mapViewController.viewModel = self.viewModel
 
-        self.viewModel.downloadAllDogs()
+        self.viewModel.downloadNextDogs {
+            tableViewController.tableView.reloadData()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +55,7 @@ class SearchDogsViewController: UIViewController {
     }
 
     func toggleViewControllers() {
+        self.viewModel.currentPage = 1
         self.tableViewController.isHidden = !self.tableViewController.isHidden
         self.mapViewController.isHidden = !self.mapViewController.isHidden
     }

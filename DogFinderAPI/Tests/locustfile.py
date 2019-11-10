@@ -1,6 +1,20 @@
 # http://localhost:8089
 from locust import HttpLocust, TaskSet, task
 import random
+import time
+
+def str_time_prop(start, end, format, prop):
+
+    stime = time.mktime(time.strptime(start, format))
+    etime = time.mktime(time.strptime(end, format))
+
+    ptime = stime + prop * (etime - stime)
+
+    return time.strftime(format, time.localtime(ptime))
+
+
+def random_date(start, end, prop):
+    return str_time_prop(start, end, '%Y-%m-%d %I:%M %p', prop)
 
 class UserBehavior(TaskSet):
 
@@ -23,7 +37,7 @@ class UserBehavior(TaskSet):
                 "breed": 'Shiba Inu',
                 "longitude": random.uniform(0.0, 180.0),
                 "latitude": random.uniform(0.0, 180.0),
-                "seenDate": "2019-11-09T15:25:22.706Z",
+                "seenDate": random_date("2010-1-1 1:30 PM", "2019-11-11 4:50 AM", random.random()),
                 "user": '5da23f2d51d1b35eed20924f',
                 "isSpotted": "true",
                 "size": 0,

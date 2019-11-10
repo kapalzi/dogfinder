@@ -49,6 +49,7 @@
 		E2B7357C2376E79A00C759C0 /* RegisterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357B2376E79A00C759C0 /* RegisterViewModelTests.swift */; };
 		E2B7357E2376E7C500C759C0 /* FormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357D2376E7C500C759C0 /* FormViewModelTests.swift */; };
 		E2B735802376EA9C00C759C0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7357F2376EA9C00C759C0 /* BaseViewModel.swift */; };
+		E2B73582237845DC00C759C0 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B73581237845DC00C759C0 /* LoadMoreTableViewCell.swift */; };
 		E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */; };
 		E2BD6D5222FAE6AC00FA4569 /* SimpleDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */; };
 		E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */; };
@@ -118,6 +119,7 @@
 		E2B7357B2376E79A00C759C0 /* RegisterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModelTests.swift; sourceTree = "<group>"; };
 		E2B7357D2376E7C500C759C0 /* FormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModelTests.swift; sourceTree = "<group>"; };
 		E2B7357F2376EA9C00C759C0 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		E2B73581237845DC00C759C0 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsViewModelTests.swift; sourceTree = "<group>"; };
 		E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDateFormatter.swift; sourceTree = "<group>"; };
 		E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StudentDogModel.mlmodel; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				E2B7096922E4B16D00FC7659 /* SearchDogsTableViewController.swift */,
 				E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */,
+				E2B73581237845DC00C759C0 /* LoadMoreTableViewCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				E27AFCCC22FC66CA00542C6A /* MapAnnatation.swift in Sources */,
 				E2662CE92352709500A39D8E /* RegisterViewModel.swift in Sources */,
 				E2B7096A22E4B16D00FC7659 /* SearchDogsTableViewController.swift in Sources */,
+				E2B73582237845DC00C759C0 /* LoadMoreTableViewCell.swift in Sources */,
 				E21E5FB922F09C4800A0F36E /* DogFinderApiParser.swift in Sources */,
 				E2662CE5235261F100A39D8E /* BaseViewController.swift in Sources */,
 				E2B7097322E4F98D00FC7659 /* SearchDogsTableViewCell.swift in Sources */,

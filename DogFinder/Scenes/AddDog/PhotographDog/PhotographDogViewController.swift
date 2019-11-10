@@ -37,7 +37,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.checkUserSession()
+//        self.checkUserSession()
         self.checkAuthorization()
         sessionQueue.async { [unowned self] in
             self.configureSession()
