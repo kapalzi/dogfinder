@@ -7,7 +7,7 @@ const uuidv4 = require('uuid/v4');
 const auth = require("../../middleware/auth");
 
 //Get All
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const dogs = await Dog.find()
         res.json(dogs)
@@ -16,22 +16,9 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
-//Get filtered dog
-router.post('/filtered/spotted', auth, async (req, res) => {
-    console.log(req.params.id)
-    try {
-        const dogs = await Dog.find()
-        res.json(
-            dogs.filter(dogs => dogs.isSpotted === req.params.isSpotted)
-        )
-    } catch (err) {
-        res.json({ message: err })
-    }
-})
-
 //Add new
 router.post('/', async (req, res) => {
-    const nameOfPhoto = uuidv4()
+    let nameOfPhoto = uuidv4()
     const dog = new Dog({
         breed: req.body.breed,
         longitude: req.body.longitude,
@@ -46,18 +33,22 @@ router.post('/', async (req, res) => {
         depiction: req.body.depiction
     })
 
-    var base64Data = req.body.photo.replace(/^data:image\/jpeg;base64,/, "");
-    const pathToSave = path.join(__dirname, '../../data/img/'+ nameOfPhoto + '.jpg')
-    fs.writeFile(pathToSave, base64Data, "base64", function(err) {
-            if (err) {
-                console.log(err);
-        } else {
-            console.log("success");
-            }
-        });
-        
+    if(req.body.photo == '') {
+        nameOfPhoto = 'test_dog'
+    } else {
+        var base64Data = req.body.photo.replace(/^data:image\/jpeg;base64,/, "");
+        const pathToSave = path.join(__dirname, '../../data/img/'+ nameOfPhoto + '.jpg')
+    
+        fs.writeFile(pathToSave, base64Data, "base64", function(err) {
+                if (err) {
+                    console.log(err);
+            } else {
+                console.log("success");
+                }
+            });
+    }
+
         dog.photoName = nameOfPhoto + '.jpg'
-        console.log(dog)
     try {
         const savedDog = await dog.save()
         res.json({ message: "Successfully saved dog!"})
