@@ -60,8 +60,14 @@ extension SearchDogsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
 
-            self.viewModel.downloadNextDogs(areSpotted: self.viewModel.areSpotted) {
-                self.tableView.reloadData()
+            if self.viewModel.areSpotted {
+                self.viewModel.downloadNextSpottedDogs {
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.viewModel.downloadNextMissingDogs {
+                    self.tableView.reloadData()
+                }
             }
         }
     }

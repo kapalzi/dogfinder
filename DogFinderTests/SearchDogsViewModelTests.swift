@@ -18,37 +18,48 @@ class SearchDogsViewModelTests: XCTestCase {
         let dog1 = Dog(id: "1", breed: "Dalmatian", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: true, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
         let dog2 = Dog(id: "2", breed: "Doberman", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: false, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
         
-        self.searchDogsViewModel.allDogs = [dog1, dog2]
-        self.searchDogsViewModel.dogs = [Dog]()
+        self.searchDogsViewModel.dogs = [dog1]
+        self.searchDogsViewModel.missingDogs = [dog2]
+        self.searchDogsViewModel.spottedDogs = [dog1]
     }
 
     override func tearDown() {
         
         self.searchDogsViewModel.dogs = [Dog]()
-        self.searchDogsViewModel.allDogs = [Dog]()
+        self.searchDogsViewModel.missingDogs = [Dog]()
+        self.searchDogsViewModel.spottedDogs = [Dog]()
+    }
+     
+    
+    func testDownloadNextSpottedDogs() {
+        
+        self.searchDogsViewModel.downloadNextSpottedDogs {
+            print(self.searchDogsViewModel.spottedDogs.count)
+            XCTAssert(self.searchDogsViewModel.spottedDogs.count == 2)
+        }
     }
     
-    func testDownloadAllDogs() {
+    func testDownloadNextMissingDogs() {
         
-        self.searchDogsViewModel.downloadNextDogs {
-            XCTAssert(self.searchDogsViewModel.allDogs.count == 3)
+        self.searchDogsViewModel.downloadNextMissingDogs {
+            XCTAssert(self.searchDogsViewModel.missingDogs.count == 3)
         }
-        
-        
     }
 
     func testShowSpotted() {
 
         self.searchDogsViewModel.showSpotted()
 
-        XCTAssert(self.searchDogsViewModel.dogs.count == 1)
+        XCTAssert(self.searchDogsViewModel.currentPage == 1
+        && self.searchDogsViewModel.areSpotted == true)
     }
     
     func testShowMissing() {
 
         self.searchDogsViewModel.showMissing()
         
-        XCTAssert(self.searchDogsViewModel.dogs.count == 1)
+        XCTAssert(self.searchDogsViewModel.currentPage == 1
+        && self.searchDogsViewModel.areSpotted == false)
     }
 
 }

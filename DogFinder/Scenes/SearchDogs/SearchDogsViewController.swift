@@ -31,7 +31,7 @@ class SearchDogsViewController: UIViewController {
 
         mapViewController.viewModel = self.viewModel
 
-        self.viewModel.downloadNextDogs {
+        self.viewModel.downloadNextSpottedDogs {
             tableViewController.tableView.reloadData()
         }
     }
@@ -55,7 +55,7 @@ class SearchDogsViewController: UIViewController {
     }
 
     func toggleViewControllers() {
-        self.viewModel.currentPage = 1
+        self.viewModel.currentPage = 1 //czy tego potrzebuje?
         self.tableViewController.isHidden = !self.tableViewController.isHidden
         self.mapViewController.isHidden = !self.mapViewController.isHidden
     }

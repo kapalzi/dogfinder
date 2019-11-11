@@ -15,29 +15,37 @@ protocol SearchDogsViewModelDelegate: class {
 class SearchDogsViewModel {
 
     var dogs: [Dog] = [Dog]()
-    var allDogs: [Dog] = [Dog]()
     let api: DogFinderApiProvider
     weak var delegate: SearchDogsViewModelDelegate?
-    var currentPage = 1
+    var currentPage = 0
     var areSpotted: Bool = true
+
+    var spottedDogs: [Dog] = [Dog]()
+    var missingDogs: [Dog] = [Dog]()
 
     init(api: DogFinderApiProvider) {
         self.api = api
     }
 
-    func downloadNextDogs(areSpotted: Bool = true, completionHandler: @escaping (() -> Void)) {
+    func downloadNextSpottedDogs(completionHandler: @escaping (() -> Void)) {
 
-        api.getNextDogs(pageNumber: self.currentPage, completionHandler: { (dogs) in
+        api.getNextDogs(pageNumber: self.currentPage, areSpotted: true, completionHandler: { (dogs) in
             guard let dogs = dogs, dogs.count > 0 else { return }
-            dogs.forEach { self.allDogs.append($0) }
-            self.dogs = self.allDogs.filter { !$0.isSpotted }
+            dogs.forEach { self.spottedDogs.append($0) }
+            self.dogs = self.spottedDogs
+            completionHandler()
+            self.currentPage = self.currentPage + 1
+        }) { (error) in
+            print(error)
+        }
+    }
 
-            if areSpotted {
-                self.dogs = self.allDogs.filter { $0.isSpotted }
-            } else {
-                self.dogs = self.allDogs.filter { !$0.isSpotted }
-            }
+    func downloadNextMissingDogs(completionHandler: @escaping (() -> Void)) {
 
+        api.getNextDogs(pageNumber: self.currentPage, areSpotted: false, completionHandler: { (dogs) in
+            guard let dogs = dogs, dogs.count > 0 else { return }
+            dogs.forEach { self.missingDogs.append($0) }
+            self.dogs = self.missingDogs
             completionHandler()
             self.currentPage = self.currentPage + 1
         }) { (error) in
@@ -46,27 +54,27 @@ class SearchDogsViewModel {
     }
 
     private func resetPagination() {
-        self.currentPage = 1
-        self.allDogs = [Dog]()
-    }
-
-    private func changeTo(spotted: Bool) {
-
-        self.resetPagination()
-        self.areSpotted = spotted
-        self.downloadNextDogs(areSpotted: spotted) {
-            self.delegate?.reloadTableView()
-        }
+        self.currentPage = 0
+        self.missingDogs = [Dog]()
+        self.spottedDogs = [Dog]()
     }
 
     func showSpotted() {
 
-        self.changeTo(spotted: true)
+        self.resetPagination()
+        self.areSpotted = true
+        self.downloadNextSpottedDogs {
+            self.delegate?.reloadTableView()
+        }
     }
 
     func showMissing() {
 
-        self.changeTo(spotted: false)
+        self.resetPagination()
+        self.areSpotted = false
+        self.downloadNextMissingDogs {
+            self.delegate?.reloadTableView()
+        }
     }
 
 }

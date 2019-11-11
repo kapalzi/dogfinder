@@ -17,27 +17,17 @@ const auth = require("../../middleware/auth");
 // })
 
 //Get all at page
-router.get('/', async (req, res) => {
-    const options = {
-        page: req.query.page,
-        limit: 10,
-        sort: { seenDate: -1 }
-    }
+    router.get('/', async (req, res) => {
 
-    Dog.paginate({}, options, function(err, result){
-                res.json(result)
-            })
-})
-
-
-
-// try {
-//     await Dog.paginate({}, options, function(err, result){
-//         console.log("result")
-//         res.json(result)
-//     } )
-
-
+        try {
+            const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
+            sort({seenDate: -1}).limit(10).skip(10*req.query.page)
+        
+            res.json(dogs)
+            } catch(err) {
+                res.json({ message: err })
+            }
+        })
 
 //Add new
 router.post('/', async (req, res) => {

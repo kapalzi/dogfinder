@@ -20,6 +20,8 @@ class DogFinderApi: DogFinderApiProvider {
 
     private enum Endpoint: String {
         case getAllDogs = "/api/dogs"
+        case getSpottedDogs = "/api/dogs/spotted"
+        case getMissingDogs = "/api/dogs/missing"
         case getPhotos = "/api/dogs/photos"
         case login = "/api/users/login"
         case register = "/api/users/register"
@@ -66,9 +68,9 @@ class DogFinderApi: DogFinderApiProvider {
         }
     }
 
-    public func getNextDogs(pageNumber: Int, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+    public func getNextDogs(pageNumber: Int, areSpotted: Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)
