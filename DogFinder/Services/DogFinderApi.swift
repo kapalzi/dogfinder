@@ -83,6 +83,21 @@ class DogFinderApi: DogFinderApiProvider {
         }
     }
 
+    func getNextNearestDogs(pageNumber: Int, areSpotted: Bool, latitude: Double, longitude: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+            switch response.result {
+            case .success(let responseObject):
+                let json = JSON(responseObject)
+
+                DogFinderApiParser.parseJsonWithDogs(json, completionHandler: completionHandler)
+
+            case .failure:
+                errorHandler(response.error!)
+            }
+        }
+    }
+
     public func getUrlOfPhoto(photoName: String) -> URL {
 
         return URL(string: "\(baseURL)/\(photoName)")!

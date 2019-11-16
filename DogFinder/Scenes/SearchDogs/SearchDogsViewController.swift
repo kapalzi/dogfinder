@@ -30,8 +30,8 @@ class SearchDogsViewController: UIViewController {
         self.viewModel.delegate = tableViewController
 
         mapViewController.viewModel = self.viewModel
-
-        self.viewModel.downloadNextSpottedDogs {
+        self.viewModel.initLocationManager()
+        self.viewModel.downloadNextNearestSpottedDogs {
             tableViewController.tableView.reloadData()
         }
     }

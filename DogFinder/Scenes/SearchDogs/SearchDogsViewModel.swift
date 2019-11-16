@@ -7,12 +7,16 @@
 //
 
 import Foundation
+import MapKit
 
 protocol SearchDogsViewModelDelegate: class {
     func reloadTableView()
 }
 
-class SearchDogsViewModel {
+class SearchDogsViewModel: NSObject, CurrentLocationProtocol {
+
+    var locationManager: CLLocationManager?
+    var lastLocation: CLLocation?
 
     var dogs: [Dog] = [Dog]()
     let api: DogFinderApiProvider
@@ -53,6 +57,26 @@ class SearchDogsViewModel {
         }
     }
 
+    func downloadNextNearestSpottedDogs(completionHandler: @escaping (() -> Void)) {
+
+        guard let coordinates = self.lastLocation?.coordinate else { return }
+        api.getNextNearestDogs(pageNumber: self.currentPage, areSpotted: true, latitude: coordinates.latitude, longitude: coordinates.longitude, completionHandler: { (dogs) in
+                        guard let dogs = dogs, dogs.count > 0 else { return }
+            dogs.forEach { self.spottedDogs.append($0) }
+            self.dogs = self.spottedDogs
+            completionHandler()
+            self.currentPage = self.currentPage + 1
+        }) { (error) in
+            print(error)
+        }
+
+        api.getNextDogs(pageNumber: self.currentPage, areSpotted: true, completionHandler: { (_) in
+
+        }) { (error) in
+            print(error)
+        }
+    }
+
     private func resetPagination() {
         self.currentPage = 0
         self.missingDogs = [Dog]()
@@ -63,7 +87,7 @@ class SearchDogsViewModel {
 
         self.resetPagination()
         self.areSpotted = true
-        self.downloadNextSpottedDogs {
+        self.downloadNextNearestSpottedDogs {
             self.delegate?.reloadTableView()
         }
     }
@@ -77,4 +101,22 @@ class SearchDogsViewModel {
         }
     }
 
+}
+
+extension SearchDogsViewModel: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.startUpdatingLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if let location = locations.last {
+            self.lastLocation = location
+            self.downloadNextNearestSpottedDogs { self.delegate?.reloadTableView() }
+        }
+    }
 }

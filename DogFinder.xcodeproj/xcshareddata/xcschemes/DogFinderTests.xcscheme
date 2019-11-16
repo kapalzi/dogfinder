@@ -34,6 +34,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E2B7092C22E34D1200FC7659"
+            BuildableName = "DogFinder.app"
+            BlueprintName = "DogFinder"
+            ReferencedContainer = "container:DogFinder.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

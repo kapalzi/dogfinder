@@ -16,12 +16,56 @@ const auth = require("../../middleware/auth");
 //     }
 // })
 
-//Get all at page
+//Get dogs sorted by date
     router.get('/', async (req, res) => {
 
         try {
             const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
             sort({seenDate: -1}).limit(10).skip(10*req.query.page)
+        
+            res.json(dogs)
+            } catch(err) {
+                res.json({ message: err })
+            }
+        })
+
+    //Get dogs sorted by nearest
+    router.get('/', async (req, res) => {
+        try {
+
+            const dogs = await Dog.find({
+                location: {
+                 $near: {
+                  $maxDistance: 1000,
+                  $geometry: {
+                   type: "Point",
+                   coordinates: [req.query.longitude, req.query.latitude]
+                  }
+                 }
+                }
+               }).find({isSpotted: req.query.areSpotted}).limit(10).skip(10*req.query.page)
+        
+            res.json(dogs)
+            } catch(err) {
+                res.json({ message: err })
+            }
+        })
+
+    //Get dogs for map view
+    router.get('/map', async (req, res) => {
+
+        try {
+            const dogs = await Dog.find({
+                location: {
+                 $near: {
+                  $maxDistance: 1000,
+                  $geometry: {
+                   type: "Point",
+                   coordinates: [req.query.longitude, req.query.latitude]
+                  }
+                 }
+                }
+               }).find({isSpotted: req.query.areSpotted}).limit(200)
         
             res.json(dogs)
             } catch(err) {
@@ -43,7 +87,11 @@ router.post('/', async (req, res) => {
         size: req.body.size,
         color: req.body.color,
         gender: req.body.gender,
-        depiction: req.body.depiction
+        depiction: req.body.depiction,
+        location: {
+            type: "Point",
+            coordinates: [req.body.longitude, req.body.latitude]
+        }
     })
 
     if(req.body.photo == '') {

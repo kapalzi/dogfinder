@@ -61,7 +61,7 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
 
             if self.viewModel.areSpotted {
-                self.viewModel.downloadNextSpottedDogs {
+                self.viewModel.downloadNextNearestSpottedDogs {
                     self.tableView.reloadData()
                 }
             } else {

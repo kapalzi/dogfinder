@@ -39,6 +39,7 @@ class PhotographDogViewModel {
     func recognizeImage(_ image: UIImage?, completionHandler:@escaping ((_:[DogPrediction]) -> Void)) {
 
         if let image = image, let cgImage = image.cgImage {
+
             classifier.classifyImageWithVision(image: cgImage) { (results) in
 
                 DispatchQueue.main.async {

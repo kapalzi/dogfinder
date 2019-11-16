@@ -53,6 +53,22 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.navigationController?.isNavigationBarHidden = true
     }
 
+    override func viewWillLayoutSubviews() {
+
+        let orientation: UIDeviceOrientation = UIDevice.current.orientation
+
+        switch (orientation) {
+        case .portrait:
+            previewLayer?.connection?.videoOrientation = .portrait
+        case .landscapeRight:
+            previewLayer?.connection?.videoOrientation = .landscapeLeft
+        case .landscapeLeft:
+            previewLayer?.connection?.videoOrientation = .landscapeRight
+        default:
+            previewLayer?.connection?.videoOrientation = .portrait
+        }
+    }
+
     func setupButtons() {
 
         let takePhotoImage = UIImage(named: "icons8-round")?.withRenderingMode(.alwaysTemplate)
@@ -215,14 +231,13 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
             let image =  UIImage(data: data)  else {
                 return
         }
-
         self.capturedImage = image
-        self.recognizeImage()
+        self.recognizeImage(image.rotate(radians: 270) ?? image)
     }
 
-    func recognizeImage() {
+    func recognizeImage(_ image: UIImage) {
 
-        self.viewModel.recognizeImage(self.capturedImage) { (results) in
+        self.viewModel.recognizeImage(image) { (results) in
             self.presentConfirmDog(results: results)
         }
     }

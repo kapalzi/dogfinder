@@ -12,8 +12,13 @@ const DogSchema = mongoose.Schema({
     size: Number,
     color: String,
     gender: Number,
-    depiction: String
+    depiction: String,
+    location: {
+        type: { type: String },
+        coordinates: []
+    }
 })
 
+DogSchema.index({ location: "2dsphere" })
 DogSchema.plugin(mongoosePaginate)
 module.exports = mongoose.model('Dogs', DogSchema)
