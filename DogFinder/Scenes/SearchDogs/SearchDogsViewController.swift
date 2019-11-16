@@ -10,12 +10,14 @@ import UIKit
 
 class SearchDogsViewController: UIViewController {
 
-    @IBOutlet weak var tableViewController: UIView!
-    @IBOutlet weak var mapViewController: UIView!
+    @IBOutlet weak var tableView: UIView!
+    @IBOutlet weak var mapView: UIView!
     @IBOutlet var spottedBtn: UIButton!
     @IBOutlet var missingBtn: UIButton!
+    private var tableViewController: SearchDogsTableViewController!
+    private var mapViewController: SearchDogsMapViewController!
 
-    private let viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
+//    private let viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
 
     override func viewDidLoad() {
         self.showMap()
@@ -23,17 +25,8 @@ class SearchDogsViewController: UIViewController {
         self.spottedBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1624903977, green: 0.3767777085, blue: 0.3000190258, alpha: 1))
         self.missingBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.4178279042, green: 0.6929649711, blue: 0.5753860474, alpha: 1))
 
-        let tableViewController = self.children.filter { $0 is SearchDogsTableViewController }.first as! SearchDogsTableViewController
-        let mapViewController = self.children.filter { $0 is SearchDogsMapViewController }.first as! SearchDogsMapViewController
-
-        tableViewController.viewModel = self.viewModel
-        self.viewModel.delegate = tableViewController
-
-        mapViewController.viewModel = self.viewModel
-        self.viewModel.initLocationManager()
-        self.viewModel.downloadNextNearestSpottedDogs {
-            tableViewController.tableView.reloadData()
-        }
+        self.tableViewController = self.children.filter { $0 is SearchDogsTableViewController }.first as? SearchDogsTableViewController
+        self.mapViewController = self.children.filter { $0 is SearchDogsMapViewController }.first as? SearchDogsMapViewController
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -55,22 +48,23 @@ class SearchDogsViewController: UIViewController {
     }
 
     func toggleViewControllers() {
-        self.viewModel.currentPage = 1 //czy tego potrzebuje?
-        self.tableViewController.isHidden = !self.tableViewController.isHidden
-        self.mapViewController.isHidden = !self.mapViewController.isHidden
+        self.tableView.isHidden = !self.tableView.isHidden
+        self.mapView.isHidden = !self.mapView.isHidden
     }
 
     @IBAction func spottedDitTap(_ sender: UIButton) {
 
         self.spottedBtn.backgroundColor = #colorLiteral(red: 0.1624903977, green: 0.3767777085, blue: 0.3000190258, alpha: 1)
         self.missingBtn.backgroundColor = #colorLiteral(red: 0.4178279042, green: 0.6929649711, blue: 0.5753860474, alpha: 1)
-        self.viewModel.showSpotted()
+        self.tableViewController.showSpotted()
+        self.mapViewController.showSpotted()
     }
 
     @IBAction func missingDidTap(_ sender: UIButton) {
 
         self.spottedBtn.backgroundColor = #colorLiteral(red: 0.4178279042, green: 0.6929649711, blue: 0.5753860474, alpha: 1)
         self.missingBtn.backgroundColor = #colorLiteral(red: 0.1624903977, green: 0.3767777085, blue: 0.3000190258, alpha: 1)
-        self.viewModel.showMissing()
+        self.tableViewController.showMissing()
+        self.mapViewController.showMissing()
     }
 }

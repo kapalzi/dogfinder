@@ -12,8 +12,20 @@ import Kingfisher
 class SearchDogsTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    private let viewModel: SearchDogsTableViewModel = SearchDogsTableViewModel(api: DogFinderApi.sharedInstance)
 
-    var viewModel: SearchDogsViewModel = SearchDogsViewModel(api: DogFinderApi.sharedInstance)
+    override func viewDidLoad() {
+
+        self.viewModel.delegate = self
+        self.viewModel.initLocationManager()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+
+        self.viewModel.downloadNextNearestSpottedDogs {
+            self.tableView.reloadData()
+        }
+    }
 
     private func isLastCell(indexPath: IndexPath) -> Bool {
 
@@ -26,12 +38,25 @@ class SearchDogsTableViewController: UIViewController {
 
     private func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
 
-        let dog = self.viewModel.dogs[indexPath.row]
-        cell.breedLbl.text = dog.breed
-        cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
-        cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
+        if self.viewModel.dogs.count >= indexPath.row {
+            let dog = self.viewModel.dogs[indexPath.row]
+            cell.breedLbl.text = dog.breed
+            cell.dateLbl.text = "Last seen: \(dog.seenDate.toString())"
+            cell.dogImageView.kf.setImage(with: DogFinderApi.sharedInstance.getUrlOfPhoto(photoName: dog.photoName))
+        }
     }
 
+    func showSpotted() {
+        self.viewModel.showSpotted {
+            self.tableView.reloadData()
+        }
+    }
+
+    func showMissing() {
+        self.viewModel.showMissing {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension SearchDogsTableViewController: UITableViewDataSource {
@@ -58,14 +83,14 @@ extension SearchDogsTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
+        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell  {
 
             if self.viewModel.areSpotted {
                 self.viewModel.downloadNextNearestSpottedDogs {
                     self.tableView.reloadData()
                 }
             } else {
-                self.viewModel.downloadNextMissingDogs {
+                self.viewModel.downloadNextNearestMissingDogs {
                     self.tableView.reloadData()
                 }
             }
@@ -91,10 +116,9 @@ extension SearchDogsTableViewController: UITableViewDelegate {
     }
 }
 
-extension SearchDogsTableViewController: SearchDogsViewModelDelegate {
+extension SearchDogsTableViewController: SearchDogsBaseViewModelDelegate {
 
-    func reloadTableView() {
+    func downloadDogs() {
 
-        self.tableView.reloadData()
     }
 }

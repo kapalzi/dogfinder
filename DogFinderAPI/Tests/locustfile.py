@@ -35,15 +35,19 @@ class UserBehavior(TaskSet):
         self.client.post('/api/dogs', {
                 "photo": '',
                 "breed": 'Shiba Inu',
-                "longitude": random.uniform(0.0, 180.0),
-                "latitude": random.uniform(0.0, 180.0),
+                "longitude": random.uniform(-180, 180),
+                "latitude": random.uniform(-85, 85),
                 "seenDate": random_date("2010-1-1 1:30 PM", "2019-11-11 4:50 AM", random.random()),
-                "user": '5da23f2d51d1b35eed20924f',
+                "user": '5dd00491debab47644b26fd5',
                 "isSpotted": "true",
                 "size": 0,
                 "color": 'Light brown',
                 "gender": 0,
-                "depiction": 'Poor dog' 
+                "depiction": 'Poor dog',
+                "location": {
+                    "type": "Point",
+                    "coordinates": []
+                 }
                         })
 
     

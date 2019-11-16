@@ -98,10 +98,10 @@ class DogFinderApi: DogFinderApiProvider {
             }
         }
     }
-    
-    func getNextNearestDogsOnMap(areSpotted: Bool, latitude: Double, longitude: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+    func getNextNearestDogsOnMap(areSpotted: Bool, latitude: Double, longitude: Double, radius: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
+
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .map, param: "?areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)

@@ -10,6 +10,9 @@
 		7001BE036ED6B3436FACC9CE /* Pods_DogFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF7F63DCB64DBBFC5282E8A /* Pods_DogFinder.framework */; };
 		DBA9F55AED173C2EBCF4B8CB /* Pods_DogFinderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE251A348BE9C759FD89757 /* Pods_DogFinderTests.framework */; };
 		E21E5FB922F09C4800A0F36E /* DogFinderApiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E5FB822F09C4800A0F36E /* DogFinderApiParser.swift */; };
+		E23C98A3238007AE00BD27A7 /* SearchDogsTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C98A2238007AE00BD27A7 /* SearchDogsTableViewModel.swift */; };
+		E23C98A5238007BB00BD27A7 /* SearchDogsMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C98A4238007BB00BD27A7 /* SearchDogsMapViewModel.swift */; };
+		E23C98A7238018AF00BD27A7 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C98A6238018AF00BD27A7 /* MKMapView+Extension.swift */; };
 		E2426A032306E65B00DCF6F5 /* CurrentLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2426A022306E65B00DCF6F5 /* CurrentLocationProtocol.swift */; };
 		E24C0FB3230A9FBC00F183DB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0FB2230A9FBC00F183DB /* UIView+Extension.swift */; };
 		E265BF7C23017DCE009C5693 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265BF7B23017DCE009C5693 /* FormViewModel.swift */; };
@@ -76,6 +79,9 @@
 		C6F84BF965D724BD9145DFC2 /* Pods-DogFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DogFinder.debug.xcconfig"; path = "Target Support Files/Pods-DogFinder/Pods-DogFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		E0462221F4DB0C39FBD61144 /* Pods-DogFinderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DogFinderTests.debug.xcconfig"; path = "Target Support Files/Pods-DogFinderTests/Pods-DogFinderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E21E5FB822F09C4800A0F36E /* DogFinderApiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFinderApiParser.swift; sourceTree = "<group>"; };
+		E23C98A2238007AE00BD27A7 /* SearchDogsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsTableViewModel.swift; sourceTree = "<group>"; };
+		E23C98A4238007BB00BD27A7 /* SearchDogsMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsMapViewModel.swift; sourceTree = "<group>"; };
+		E23C98A6238018AF00BD27A7 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		E2426A022306E65B00DCF6F5 /* CurrentLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationProtocol.swift; sourceTree = "<group>"; };
 		E24C0FB2230A9FBC00F183DB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E265BF7B23017DCE009C5693 /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
@@ -315,6 +321,7 @@
 				E24C0FB2230A9FBC00F183DB /* UIView+Extension.swift */,
 				E2A8F2A72365A92A0022459A /* Date+Extension.swift */,
 				E2A8F2A92365A9720022459A /* UIAlertController+Extension.swift */,
+				E23C98A6238018AF00BD27A7 /* MKMapView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B7096922E4B16D00FC7659 /* SearchDogsTableViewController.swift */,
+				E23C98A2238007AE00BD27A7 /* SearchDogsTableViewModel.swift */,
 				E2B7097222E4F98D00FC7659 /* SearchDogsTableViewCell.swift */,
 				E2B73581237845DC00C759C0 /* LoadMoreTableViewCell.swift */,
 			);
@@ -405,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B7096D22E4B1AE00FC7659 /* SearchDogsMapViewController.swift */,
+				E23C98A4238007BB00BD27A7 /* SearchDogsMapViewModel.swift */,
 				E27AFCCB22FC66CA00542C6A /* MapAnnatation.swift */,
 			);
 			path = Map;
@@ -632,9 +641,11 @@
 				E2B73582237845DC00C759C0 /* LoadMoreTableViewCell.swift in Sources */,
 				E21E5FB922F09C4800A0F36E /* DogFinderApiParser.swift in Sources */,
 				E2662CE5235261F100A39D8E /* BaseViewController.swift in Sources */,
+				E23C98A5238007BB00BD27A7 /* SearchDogsMapViewModel.swift in Sources */,
 				E2B7097322E4F98D00FC7659 /* SearchDogsTableViewCell.swift in Sources */,
 				E2426A032306E65B00DCF6F5 /* CurrentLocationProtocol.swift in Sources */,
 				E2A8F2A82365A92A0022459A /* Date+Extension.swift in Sources */,
+				E23C98A7238018AF00BD27A7 /* MKMapView+Extension.swift in Sources */,
 				E2B7096E22E4B1AE00FC7659 /* SearchDogsMapViewController.swift in Sources */,
 				E2B735762376E12200C759C0 /* DogFinderApiProvider.swift in Sources */,
 				E28DBD11230EC006002D0480 /* LoginViewModel.swift in Sources */,
@@ -655,6 +666,7 @@
 				E24C0FB3230A9FBC00F183DB /* UIView+Extension.swift in Sources */,
 				E285DF8422ED76ED00A39F47 /* DogFinderApi.swift in Sources */,
 				E2A8F2B1236603F80022459A /* BaseDetailsViewController.swift in Sources */,
+				E23C98A3238007AE00BD27A7 /* SearchDogsTableViewModel.swift in Sources */,
 				E2A8F2AD2365FEE70022459A /* DogDetailsViewController.swift in Sources */,
 				E2B7096122E3627F00FC7659 /* PhotographDogViewModel.swift in Sources */,
 				E2B735802376EA9C00C759C0 /* BaseViewModel.swift in Sources */,

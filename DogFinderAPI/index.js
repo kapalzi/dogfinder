@@ -25,6 +25,6 @@ app.use("/api/users", usersRoute);
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }).catch((error) => { console.log(error); });
+mongoose.connect(process.env.LOCAL_DB, { useNewUrlParser: true }).catch((error) => { console.log(error); });
  
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

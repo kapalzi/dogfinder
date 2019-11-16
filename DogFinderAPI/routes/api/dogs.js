@@ -7,7 +7,7 @@ const uuidv4 = require('uuid/v4');
 const auth = require("../../middleware/auth");
 
 //Get All
-// router.get('/', async (req, res) => {
+// router.get('/all', async (req, res) => {
 //     try {
 //         const dogs = await Dog.find()
 //         res.json(dogs)
@@ -16,27 +16,27 @@ const auth = require("../../middleware/auth");
 //     }
 // })
 
-//Get dogs sorted by date
-    router.get('/', async (req, res) => {
+// //Get dogs sorted by date
+//     router.get('/date', async (req, res) => {
 
-        try {
-            const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
-            sort({seenDate: -1}).limit(10).skip(10*req.query.page)
+//         try {
+//             const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
+//             sort({seenDate: -1}).limit(10).skip(10*req.query.page)
         
-            res.json(dogs)
-            } catch(err) {
-                res.json({ message: err })
-            }
-        })
+//             res.json(dogs)
+//             } catch(err) {
+//                 res.json({ message: err })
+//             }
+//         })
 
     //Get dogs sorted by nearest
     router.get('/', async (req, res) => {
         try {
-
+            console.log(req.query)
             const dogs = await Dog.find({
                 location: {
                  $near: {
-                  $maxDistance: 1000,
+                  $maxDistance: 1000000,
                   $geometry: {
                    type: "Point",
                    coordinates: [req.query.longitude, req.query.latitude]
@@ -44,7 +44,10 @@ const auth = require("../../middleware/auth");
                  }
                 }
                }).find({isSpotted: req.query.areSpotted}).limit(10).skip(10*req.query.page)
-        
+            
+            if(dogs.length == 0) {
+                res.json({ message: "There are no dogs nearby" })
+            }
             res.json(dogs)
             } catch(err) {
                 res.json({ message: err })
@@ -58,14 +61,14 @@ const auth = require("../../middleware/auth");
             const dogs = await Dog.find({
                 location: {
                  $near: {
-                  $maxDistance: 1000,
+                  $maxDistance: req.query.radius,
                   $geometry: {
                    type: "Point",
                    coordinates: [req.query.longitude, req.query.latitude]
                   }
                  }
                 }
-               }).find({isSpotted: req.query.areSpotted}).limit(200)
+               }).find({isSpotted: req.query.areSpotted}).limit(20)
         
             res.json(dogs)
             } catch(err) {
@@ -90,7 +93,7 @@ router.post('/', async (req, res) => {
         depiction: req.body.depiction,
         location: {
             type: "Point",
-            coordinates: [req.body.longitude, req.body.latitude]
+            coordinates: [parseFloat(req.body.longitude), parseFloat(req.body.latitude)]
         }
     })
 
