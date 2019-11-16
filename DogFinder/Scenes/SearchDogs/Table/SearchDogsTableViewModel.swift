@@ -13,10 +13,8 @@ class SearchDogsTableViewModel: SearchDogsBaseViewModel {
 
     var currentPage = 0
 
-    func downloadNextNearestSpottedDogs(completionHandler: @escaping (() -> Void)) {
-
-        guard let coordinates = self.lastLocation?.coordinate else { return }
-        api.getNextNearestDogs(pageNumber: self.currentPage, areSpotted: true, latitude: coordinates.latitude, longitude: coordinates.longitude, completionHandler: { (dogs) in
+    func downloadNextSpottedDogs(completionHandler: @escaping (() -> Void)) {
+        api.getNextDogs(pageNumber: self.currentPage, areSpotted: true, completionHandler: { (dogs) in
             guard let dogs = dogs, dogs.count > 0 else { completionHandler(); return }
             dogs.forEach { self.spottedDogs.append($0) }
             self.dogs = self.spottedDogs
@@ -27,10 +25,8 @@ class SearchDogsTableViewModel: SearchDogsBaseViewModel {
         }
     }
 
-    func downloadNextNearestMissingDogs(completionHandler: @escaping (() -> Void)) {
-
-        guard let coordinates = self.lastLocation?.coordinate else { return }
-        api.getNextNearestDogs(pageNumber: self.currentPage, areSpotted: false, latitude: coordinates.latitude, longitude: coordinates.longitude, completionHandler: { (dogs) in
+    func downloadNextMissingDogs(completionHandler: @escaping (() -> Void)) {
+        api.getNextDogs(pageNumber: self.currentPage, areSpotted: false, completionHandler: { (dogs) in
             guard let dogs = dogs, dogs.count > 0 else { completionHandler(); return }
             dogs.forEach { self.missingDogs.append($0) }
             self.dogs = self.missingDogs
@@ -40,6 +36,34 @@ class SearchDogsTableViewModel: SearchDogsBaseViewModel {
             print(error)
         }
     }
+
+//    func downloadNextNearestSpottedDogs(completionHandler: @escaping (() -> Void)) {
+//
+//        guard let coordinates = self.lastLocation?.coordinate else { return }
+//        api.getNextNearestDogs(pageNumber: self.currentPage, areSpotted: true, latitude: coordinates.latitude, longitude: coordinates.longitude, completionHandler: { (dogs) in
+//            guard let dogs = dogs, dogs.count > 0 else { completionHandler(); return }
+//            dogs.forEach { self.spottedDogs.append($0) }
+//            self.dogs = self.spottedDogs
+//            completionHandler()
+//            self.currentPage = self.currentPage + 1
+//        }) { (error) in
+//            print(error)
+//        }
+//    }
+//
+//    func downloadNextNearestMissingDogs(completionHandler: @escaping (() -> Void)) {
+//
+//        guard let coordinates = self.lastLocation?.coordinate else { return }
+//        api.getNextNearestDogs(pageNumber: self.currentPage, areSpotted: false, latitude: coordinates.latitude, longitude: coordinates.longitude, completionHandler: { (dogs) in
+//            guard let dogs = dogs, dogs.count > 0 else { completionHandler(); return }
+//            dogs.forEach { self.missingDogs.append($0) }
+//            self.dogs = self.missingDogs
+//            completionHandler()
+//            self.currentPage = self.currentPage + 1
+//        }) { (error) in
+//            print(error)
+//        }
+//    }
 
     private func resetPagination() {
         self.currentPage = 0
@@ -52,7 +76,7 @@ class SearchDogsTableViewModel: SearchDogsBaseViewModel {
 
         self.resetPagination()
         self.areSpotted = true
-        self.downloadNextNearestSpottedDogs {
+        self.downloadNextSpottedDogs {
             completionHandler()
         }
     }
@@ -61,7 +85,7 @@ class SearchDogsTableViewModel: SearchDogsBaseViewModel {
 
         self.resetPagination()
         self.areSpotted = false
-        self.downloadNextNearestMissingDogs {
+        self.downloadNextMissingDogs {
             completionHandler()
         }
     }

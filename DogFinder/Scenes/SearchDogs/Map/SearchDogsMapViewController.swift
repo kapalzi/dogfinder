@@ -20,7 +20,6 @@ class SearchDogsMapViewController: UIViewController {
 
     override func viewDidLoad() {
 
-        self.viewModel.delegate = self
         self.viewModel.initLocationManager()
     }
 
@@ -57,25 +56,37 @@ class SearchDogsMapViewController: UIViewController {
         }
     }
 
+    private func presentDogDetails(dog: Dog) {
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DogDetailsViewController") as! DogDetailsViewController
+        vc.initViewModel(dog: dog)
+
+        self.navigationController?.show(vc, sender: nil)
+    }
+
     private func addDogsToMap() {
         for dog in self.viewModel.dogs {
             let annatation = MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: dog.latitude)!, longitude: CLLocationDegrees(dog.longitude)))
             annatation.title = dog.breed
             annatation.subtitle = "Last seen: \(dog.seenDate)"
             annatation.image = dog.photoName
+            annatation.dog = dog
             self.newAnnatiations.append(annatation)
         }
         self.mapView.removeAnnotations(self.oldAnnatiations)
         self.mapView.addAnnotations(self.newAnnatiations)
+        self.oldAnnatiations = self.newAnnatiations
     }
 
     func showSpotted() {
+        self.mapView.removeAnnotations(self.mapView.annotations)
         self.viewModel.showSpotted {
             self.addDogsToMap()
         }
     }
 
     func showMissing() {
+        self.mapView.removeAnnotations(self.mapView.annotations)
         self.viewModel.showMissing {
             self.addDogsToMap()
         }
@@ -138,33 +149,16 @@ extension SearchDogsMapViewController: MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //        self.navigationItem.titleView?.endEditing(true)
-//        self.destination = view.annotation?.coordinate
-//        self.annotation = view.annotation as? MapAnnotation
-//        self.showDetailsView()
-    }
 
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-
+        let annatation = view.annotation as? MapAnnotation
+        if let dog = annatation?.dog {
+            self.presentDogDetails(dog: dog)
+        }
     }
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue
         return renderer
-    }
-}
-
-extension SearchDogsMapViewController: SearchDogsBaseViewModelDelegate {
-
-    func downloadDogs() {
-//        self.goToMyLocation()
-
-//        self.viewModel.downloadNextNearestSpottedDogsOnMap {
-//            self.addDogsToMap()
-//        }
-//        self.viewModel.downloadNextNearestSpottedDogs {
-//            self.tableView.reloadData()
-//        }
     }
 }

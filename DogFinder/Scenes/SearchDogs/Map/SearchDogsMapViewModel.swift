@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class SearchDogsMapViewModel: SearchDogsBaseViewModel {
+class SearchDogsMapViewModel: SearchDogsBaseViewModel, CurrentLocationProtocol {
 
     private var centerLocation: CLLocationCoordinate2D?
     private var  radius: Double?
@@ -42,8 +42,6 @@ class SearchDogsMapViewModel: SearchDogsBaseViewModel {
 
         api.getNextNearestDogsOnMap(areSpotted: true, latitude: coordinates.latitude, longitude: coordinates.longitude, radius: self.radius ?? 1000, completionHandler: { (dogs) in
             guard let dogs = dogs, dogs.count > 0 else { return }
-//            dogs.forEach { self.missingDogs.append($0) }
-//            self.dogs = self.missingDogs
             self.dogs = dogs
             completionHandler()
         }) { (error) in
@@ -61,8 +59,6 @@ class SearchDogsMapViewModel: SearchDogsBaseViewModel {
 
         api.getNextNearestDogsOnMap(areSpotted: false, latitude: coordinates.latitude, longitude: coordinates.longitude, radius: self.radius ?? 1000, completionHandler: { (dogs) in
             guard let dogs = dogs, dogs.count > 0 else { return }
-//            dogs.forEach { self.missingDogs.append($0) }
-//            self.dogs = self.missingDogs
             self.dogs = dogs
             completionHandler()
         }) { (error) in
@@ -83,6 +79,23 @@ class SearchDogsMapViewModel: SearchDogsBaseViewModel {
         self.areSpotted = false
         self.downloadNextNearestMissingDogsOnMap {
             completionHandler()
+        }
+    }
+}
+
+extension SearchDogsMapViewModel: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.startUpdatingLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if let location = locations.last {
+            self.lastLocation = location
         }
     }
 }

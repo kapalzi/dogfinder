@@ -14,15 +14,9 @@ class SearchDogsTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private let viewModel: SearchDogsTableViewModel = SearchDogsTableViewModel(api: DogFinderApi.sharedInstance)
 
-    override func viewDidLoad() {
-
-        self.viewModel.delegate = self
-        self.viewModel.initLocationManager()
-    }
-
     override func viewWillAppear(_ animated: Bool) {
 
-        self.viewModel.downloadNextNearestSpottedDogs {
+        self.viewModel.downloadNextSpottedDogs {
             self.tableView.reloadData()
         }
     }
@@ -83,14 +77,14 @@ extension SearchDogsTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell  {
+        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
 
             if self.viewModel.areSpotted {
-                self.viewModel.downloadNextNearestSpottedDogs {
+                self.viewModel.downloadNextSpottedDogs {
                     self.tableView.reloadData()
                 }
             } else {
-                self.viewModel.downloadNextNearestMissingDogs {
+                self.viewModel.downloadNextMissingDogs {
                     self.tableView.reloadData()
                 }
             }
@@ -113,12 +107,5 @@ extension SearchDogsTableViewController: UITableViewDelegate {
         vc.initViewModel(dog: dog)
 
         self.navigationController?.show(vc, sender: nil)
-    }
-}
-
-extension SearchDogsTableViewController: SearchDogsBaseViewModelDelegate {
-
-    func downloadDogs() {
-
     }
 }

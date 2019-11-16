@@ -7,27 +7,27 @@ const uuidv4 = require('uuid/v4');
 const auth = require("../../middleware/auth");
 
 //Get All
-// router.get('/all', async (req, res) => {
-//     try {
-//         const dogs = await Dog.find()
-//         res.json(dogs)
-//     } catch(err) {
-//         res.json({ message: err })
-//     }
-// })
+router.get('/all', async (req, res) => {
+    try {
+        const dogs = await Dog.find()
+        res.json(dogs)
+    } catch(err) {
+        res.json({ message: err })
+    }
+})
 
 // //Get dogs sorted by date
-//     router.get('/date', async (req, res) => {
+    router.get('/date', async (req, res) => {
 
-//         try {
-//             const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
-//             sort({seenDate: -1}).limit(10).skip(10*req.query.page)
+        try {
+            const dogs = await Dog.find({isSpotted: req.query.areSpotted}).
+            sort({seenDate: -1}).limit(10).skip(10*req.query.page)
         
-//             res.json(dogs)
-//             } catch(err) {
-//                 res.json({ message: err })
-//             }
-//         })
+            res.json(dogs)
+            } catch(err) {
+                res.json({ message: err })
+            }
+        })
 
     //Get dogs sorted by nearest
     router.get('/', async (req, res) => {

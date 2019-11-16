@@ -26,6 +26,7 @@ class DogFinderApi: DogFinderApiProvider {
         case login = "/api/users/login"
         case register = "/api/users/register"
         case map = "/api/dogs/map"
+        case date = "/api/dogs/date"
     }
 
     private func createRequestPath(endpoint: Endpoint, param: String = "") -> String {
@@ -71,7 +72,7 @@ class DogFinderApi: DogFinderApiProvider {
 
     public func getNextDogs(pageNumber: Int, areSpotted: Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .date, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
             switch response.result {
             case .success(let responseObject):
                 let json = JSON(responseObject)

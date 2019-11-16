@@ -16,6 +16,7 @@ class MapAnnotation: NSObject, MKAnnotation {
     var mapItem: MKMapItem?
     var url: String?
     var image: String?
+    var dog: Dog?
 
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
