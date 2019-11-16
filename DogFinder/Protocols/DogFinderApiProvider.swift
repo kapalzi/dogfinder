@@ -10,6 +10,7 @@ import Foundation
 
 protocol DogFinderApiProvider {
 
+    func getNextNearestDogsOnMap(areSpotted: Bool, latitude: Double, longitude: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void))
     func getNextNearestDogs(pageNumber: Int, areSpotted: Bool, latitude: Double, longitude: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void))
     func getNextDogs(pageNumber: Int, areSpotted: Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void))
     func addDog(_ dog: Dog, completionHandler:@escaping ((String) -> Void), errorHandler:@escaping ((String) -> Void))
