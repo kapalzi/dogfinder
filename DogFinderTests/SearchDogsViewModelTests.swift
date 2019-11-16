@@ -9,9 +9,9 @@
 import XCTest
 @testable import DogFinder
 
-class SearchDogsViewModelTests: XCTestCase {
+class SearchDogsTableViewModelTests: XCTestCase {
     
-    let searchDogsViewModel: SearchDogsViewModel = SearchDogsViewModel(api: MockDogFinderApi.sharedInstance)
+    let searchDogsViewModel: SearchDogsTableViewModel = SearchDogsTableViewModel(api: MockDogFinderApi.sharedInstance)
 
     override func setUp() {
         
@@ -48,18 +48,18 @@ class SearchDogsViewModelTests: XCTestCase {
 
     func testShowSpotted() {
 
-        self.searchDogsViewModel.showSpotted()
-
-        XCTAssert(self.searchDogsViewModel.currentPage == 1
-        && self.searchDogsViewModel.areSpotted == true)
+        self.searchDogsViewModel.showSpotted {
+            XCTAssert(self.searchDogsViewModel.currentPage == 0
+            && self.searchDogsViewModel.areSpotted == true)
+        }
     }
     
     func testShowMissing() {
 
-        self.searchDogsViewModel.showMissing()
-        
-        XCTAssert(self.searchDogsViewModel.currentPage == 1
-        && self.searchDogsViewModel.areSpotted == false)
+        self.searchDogsViewModel.showMissing {
+            XCTAssert(self.searchDogsViewModel.currentPage == 0
+            && self.searchDogsViewModel.areSpotted == false)
+        }
     }
 
 }

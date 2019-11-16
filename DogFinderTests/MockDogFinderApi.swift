@@ -10,21 +10,22 @@ import Foundation
 @testable import DogFinder
 
 class MockDogFinderApi: DogFinderApiProvider {
+    
+    func getNextNearestDogsOnMap(areSpotted: Bool, latitude: Double, longitude: Double, radius: Double, completionHandler: @escaping (([Dog]?) -> Void), errorHandler: @escaping ((Error) -> Void)) {
+        
+        self.mockGettingDogs(areSpotted: areSpotted, completionHandler: completionHandler)
+    }
+    
+    func getNextNearestDogs(pageNumber: Int, areSpotted: Bool, latitude: Double, longitude: Double, completionHandler: @escaping (([Dog]?) -> Void), errorHandler: @escaping ((Error) -> Void)) {
+        
+        self.mockGettingDogs(areSpotted: areSpotted, completionHandler: completionHandler)
+    }
 
     public static let sharedInstance = MockDogFinderApi()
     
     func getNextDogs(pageNumber: Int, areSpotted: Bool, completionHandler: @escaping (([Dog]?) -> Void), errorHandler: @escaping ((Error) -> Void)) {
-        let dog1 = Dog(id: "1", breed: "Dalmatian", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: true, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
-        let dog2 = Dog(id: "2", breed: "Doberman", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: false, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
-        let dog3 = Dog(id: "3", breed: "Doberman", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: false, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
         
-        if areSpotted {
-            completionHandler([dog1])
-        } else {
-            completionHandler([dog2, dog3])
-        }
-        
-        
+        self.mockGettingDogs(areSpotted: areSpotted, completionHandler: completionHandler)
     }
     
     func addDog(_ dog: Dog, completionHandler: @escaping ((String) -> Void), errorHandler: @escaping ((String) -> Void)) {
@@ -39,5 +40,18 @@ class MockDogFinderApi: DogFinderApiProvider {
     func register(username: String, password: String, email: String, completionHandler: @escaping (() -> Void), errorHandler: @escaping ((Error) -> Void)) {
         SessionController.sharedInstance.token = "token"
         completionHandler()
+    }
+    
+    private func mockGettingDogs(areSpotted: Bool, completionHandler: @escaping (([Dog]?) -> Void)) {
+        
+        let dog1 = Dog(id: "1", breed: "Dalmatian", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: true, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
+        let dog2 = Dog(id: "2", breed: "Doberman", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: false, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
+        let dog3 = Dog(id: "3", breed: "Doberman", longitude: 10, latitude: 11, seenDate: Date(), photo: "1", photoName: "1", user: "1", isSpotted: false, size: DogsSize(rawValue: 1)!, color: "1", gender: DogsGender(rawValue: 1)!, depiction: "1")
+        
+        if areSpotted {
+            completionHandler([dog1])
+        } else {
+            completionHandler([dog2, dog3])
+        }
     }
 }
