@@ -19,7 +19,12 @@ def random_date(start, end, prop):
 class UserBehavior(TaskSet):
 
     def on_start(self):
-        self.login()
+        self.register()
+
+    @task(1)
+    def register(self):
+        self.client.post('/api/users/register/',
+                {'username': 'qwe', 'password': 'qwe', 'email':"qwe@qwe.qwe"})
 
     @task(1)
     def login(self):
@@ -55,3 +60,5 @@ class UserBehavior(TaskSet):
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior
     host = "http://localhost:5000"
+
+    # db.dogs.createIndex({ "location": "2dsphere" })

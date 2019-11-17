@@ -56,7 +56,6 @@
 		E2BB56D32374B75A0004BA39 /* SearchDogsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */; };
 		E2BD6D5222FAE6AC00FA4569 /* SimpleDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */; };
 		E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */; };
-		E2C06CBA22FD9BE400759646 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CB822FD9BE400759646 /* Resnet50.mlmodel */; };
 		E2C06CBC22FD9CB200759646 /* ImageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CBB22FD9CB200759646 /* ImageClassifier.swift */; };
 		E2C06CC022FD9D5600759646 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C06CBF22FD9D5600759646 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -129,7 +128,6 @@
 		E2BB56D22374B75A0004BA39 /* SearchDogsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDogsViewModelTests.swift; sourceTree = "<group>"; };
 		E2BD6D5122FAE6AC00FA4569 /* SimpleDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDateFormatter.swift; sourceTree = "<group>"; };
 		E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StudentDogModel.mlmodel; sourceTree = "<group>"; };
-		E2C06CB822FD9BE400759646 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 		E2C06CBB22FD9CB200759646 /* ImageClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageClassifier.swift; sourceTree = "<group>"; };
 		E2C06CBF22FD9D5600759646 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -430,7 +428,6 @@
 		E2C06CB622FD9BA900759646 /* MLModels */ = {
 			isa = PBXGroup;
 			children = (
-				E2C06CB822FD9BE400759646 /* Resnet50.mlmodel */,
 				E2C06CB722FD9BDC00759646 /* StudentDogModel.mlmodel */,
 			);
 			path = MLModels;
@@ -654,7 +651,6 @@
 				E2B7096522E3629B00FC7659 /* SearchDogsViewModel.swift in Sources */,
 				E2C06CB922FD9BE400759646 /* StudentDogModel.mlmodel in Sources */,
 				E2C06CBC22FD9CB200759646 /* ImageClassifier.swift in Sources */,
-				E2C06CBA22FD9BE400759646 /* Resnet50.mlmodel in Sources */,
 				E28DBD0F230EBEE5002D0480 /* LoginViewController.swift in Sources */,
 				E2B7096322E3628C00FC7659 /* SearchDogsViewController.swift in Sources */,
 				E2662CE0235246C900A39D8E /* AuthHomeViewController.swift in Sources */,

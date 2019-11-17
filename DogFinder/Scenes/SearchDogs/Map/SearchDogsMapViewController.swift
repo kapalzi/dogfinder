@@ -13,7 +13,6 @@ import Kingfisher
 class SearchDogsMapViewController: UIViewController {
 
     @IBOutlet var mapView: MKMapView!
-    var annotation: MapAnnotation?
     var viewModel: SearchDogsMapViewModel = SearchDogsMapViewModel(api: DogFinderApi.sharedInstance)
     var oldAnnatiations: [MKAnnotation] = [MKAnnotation]()
     var newAnnatiations: [MKAnnotation] = [MKAnnotation]()

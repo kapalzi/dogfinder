@@ -11,6 +11,8 @@ import MapKit
 
 class SearchDogsMapViewModel: SearchDogsBaseViewModel, CurrentLocationProtocol {
 
+    var locationManager: CLLocationManager?
+    var lastLocation: CLLocation?
     private var centerLocation: CLLocationCoordinate2D?
     private var  radius: Double?
 

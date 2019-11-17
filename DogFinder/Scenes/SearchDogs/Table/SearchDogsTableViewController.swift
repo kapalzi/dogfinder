@@ -29,7 +29,25 @@ class SearchDogsTableViewController: UIViewController {
             return false
         }
     }
-
+    
+    private func numberOfCellsInView() -> Int {
+        return Int((self.tableView.frame.height / self.tableView.rowHeight) + 1)
+    }
+    
+    private func areAllCells() -> Bool {
+        
+        if numberOfCellsInView() < self.viewModel.dogs.count {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func doLoadNext(indexPath: IndexPath) -> Bool {
+        
+        return isLastCell(indexPath: indexPath) && areAllCells() ? true : false
+    }
+    
     private func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
 
         if self.viewModel.dogs.count >= indexPath.row {
@@ -76,9 +94,11 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if self.isLastCell(indexPath: indexPath) && cell is LoadMoreTableViewCell {
 
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if doLoadNext(indexPath: indexPath) && cell is LoadMoreTableViewCell {
+            
             if self.viewModel.areSpotted {
                 self.viewModel.downloadNextSpottedDogs {
                     self.tableView.reloadData()

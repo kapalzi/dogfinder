@@ -12,6 +12,8 @@ import MapKit
 class SearchDogsTableViewModel: SearchDogsBaseViewModel {
 
     var currentPage = 0
+    var spottedDogs: [Dog] = [Dog]()
+    var missingDogs: [Dog] = [Dog]()
 
     func downloadNextSpottedDogs(completionHandler: @escaping (() -> Void)) {
         api.getNextDogs(pageNumber: self.currentPage, areSpotted: true, completionHandler: { (dogs) in
