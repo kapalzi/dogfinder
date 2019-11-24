@@ -59,6 +59,19 @@ class UserBehavior(TaskSet):
                  }
                         })
 
+    @task(4)
+    def getDogsByDate(self):
+        self.locust.random_page = str(random.uniform(0, 20))
+        self.client.get('/api/dogs/date?areSpotted=true&page='+self.locust.random_page)
+
+    @task(4)
+    def getDogsByMap(self):
+        self.locust.random_page = str(random.uniform(0, 20))
+        self.locust.random_longitude = str(random.uniform(-180, 180))
+        self.locust.random_latitude = str(random.uniform(-85, 85))
+        self.locust.random_radius = str(random.uniform(100, 10000))
+
+        self.client.get('/api/dogs/map?areSpotted=true&longitude='+self.locust.random_longitude+'&latitude='+self.locust.random_latitude+'&page='+self.locust.random_page+'&radius='+self.locust.random_radius)
 
 
 class WebsiteUser(HttpLocust):
