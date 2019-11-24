@@ -27,12 +27,12 @@ class UserBehavior(TaskSet):
     def register(self):
         self.locust.random_id = str(uuid.uuid4())
         self.locust.random_mail = str(uuid.uuid4())
-        self.client.post('/api/users/register/',
-                {'username': self.locust.random_id, 'password': 'qwe', 'email':f"{self.locust.random_mail}"})
+        self.client.post('/api/users/register',
+                {'username': self.locust.random_id, 'password': 'qwe', 'email':self.locust.random_mail+"@email.com"})
 
     @task(1)
     def login(self):
-        self.client.post('/api/users/login/',
+        self.client.post('/api/users/login',
                 {'username': self.locust.random_id, 'password': 'qwe'})
 
     @task(4)
