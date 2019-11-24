@@ -1,7 +1,8 @@
 # http://localhost:8089
-from locust import HttpLocust, TaskSet, task
+from locust import HttpLocust, TaskSet, task, between
 import random
 import time
+import uuid
 
 def str_time_prop(start, end, format, prop):
 
@@ -19,23 +20,26 @@ def random_date(start, end, prop):
 class UserBehavior(TaskSet):
 
     def on_start(self):
+        # Each locust user gets a different id
         self.register()
 
     @task(1)
     def register(self):
+        self.locust.random_id = str(uuid.uuid4())
+        self.locust.random_mail = str(uuid.uuid4())
         self.client.post('/api/users/register/',
-                {'username': 'qwe', 'password': 'qwe', 'email':"qwe@qwe.qwe"})
+                {'username': self.locust.random_id, 'password': 'qwe', 'email':f"{self.locust.random_mail}"})
 
     @task(1)
     def login(self):
         self.client.post('/api/users/login/',
-                {'username': 'qwe', 'password': 'qwe'})
-    
-    @task(1)
-    def get_index(self):
-	    self.client.get('/api/dogs')
+                {'username': self.locust.random_id, 'password': 'qwe'})
 
-    @task(2)
+    @task(4)
+    def get_index(self):
+       self.client.get('/api/dogs')
+
+    @task(4)
     def addDog(self):
         self.client.post('/api/dogs', {
                 "photo": '',
@@ -55,10 +59,11 @@ class UserBehavior(TaskSet):
                  }
                         })
 
-    
+
 
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior
+    wait_time = between(5,9)
     host = "http://localhost:5000"
 
     # db.dogs.createIndex({ "location": "2dsphere" })
