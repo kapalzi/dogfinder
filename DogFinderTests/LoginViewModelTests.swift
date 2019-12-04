@@ -11,10 +11,11 @@ import XCTest
 
 class LoginViewModelTests: XCTestCase {
     
-    let loginViewModel: LoginViewModel = LoginViewModel(api: MockDogFinderApi.sharedInstance)
+    var loginViewModel: LoginViewModel!
     
     override func setUp() {
         
+        self.loginViewModel = LoginViewModel(api: MockDogFinderApi.sharedInstance)
         SessionController.sharedInstance.token = nil
     }
     

@@ -40,7 +40,7 @@ router.post("/login", async (req, response) => {
 
         bcrypt.compare(req.body.password, user.password, function(err, res) {
             if (err){
-              console.log(err)
+              // console.log(err)
             }
             if (res) {
                 const token = user.generateAuthToken();

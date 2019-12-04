@@ -16,7 +16,7 @@ class PhotographDogViewModel {
 
     func checkUserSession(completion: @escaping (() -> Void)) {
 
-        if SessionController.sharedInstance.currentUser == nil || SessionController.sharedInstance.token == nil {
+        if !SessionController.sharedInstance.isUserLoggedIn() {
             completion()
         }
     }

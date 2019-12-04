@@ -11,10 +11,12 @@ import XCTest
 
 class FormViewModelTests: XCTestCase {
     
-    let formViewModel: FormViewModel = FormViewModel(api: MockDogFinderApi.sharedInstance, dogPredictions: [DogPrediction(breed: "Dalmatian", probability: 0.8)], dogPhoto: UIImage())
+    var formViewModel: FormViewModel!
     
     override func setUp() {
 
+        self.formViewModel = FormViewModel(api: MockDogFinderApi.sharedInstance, dogPredictions: [DogPrediction(breed: "Dalmatian", probability: 0.8)], dogPhoto: UIImage())
+        
         self.formViewModel.selectBreed(0, completion: {})
         self.formViewModel.selectCategory(0, completion: {})
         self.formViewModel.selectSize(0, completion: {})

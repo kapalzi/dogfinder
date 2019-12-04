@@ -11,10 +11,11 @@ import XCTest
 
 class RegisterViewModelTests: XCTestCase {
     
-    let registerViewModel: RegisterViewModel = RegisterViewModel(api: MockDogFinderApi.sharedInstance)
+    var registerViewModel: RegisterViewModel!
     
     override func setUp() {
         
+        self.registerViewModel = RegisterViewModel(api: MockDogFinderApi.sharedInstance)
         SessionController.sharedInstance.token = nil
     }
     

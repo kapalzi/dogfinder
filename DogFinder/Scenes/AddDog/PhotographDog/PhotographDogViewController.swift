@@ -16,6 +16,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
     @IBOutlet weak var previewView: UIImageView!
     @IBOutlet var takePhotoBtn: UIButton!
     @IBOutlet var deleteBtn: UIButton!
+    @IBOutlet var selectPhotoBtn: UIButton!
     var capturedImage: UIImage?
     private let viewModel: PhotographDogViewModel = PhotographDogViewModel()
 
@@ -37,7 +38,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.checkUserSession()
+        self.checkUserSession()
         self.checkAuthorization()
         sessionQueue.async { [unowned self] in
             self.configureSession()
@@ -75,6 +76,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.takePhotoBtn.setBackgroundImage(takePhotoImage, for: .normal)
         self.takePhotoBtn.contentMode = .scaleToFill
         self.takePhotoBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.selectPhotoBtn.dropShadow(backgroundColor: #colorLiteral(red: 0.1612432003, green: 0.3702685833, blue: 0.3063940406, alpha: 1))
     }
 
     func checkAuthorization() {
@@ -286,5 +288,32 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
     @objc func pinch() {
         SessionController.sharedInstance.logout()
         self.checkUserSession()
+    }
+}
+
+extension PhotographDogViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    @IBAction func selectPhotoDidTap(_ sender: UIButton) {
+
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            imagePicker.mediaTypes = ["public.image"]
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        guard let image = info[.originalImage] as? UIImage else {
+            return
+        }
+        self.dismiss(animated: true, completion: { () -> Void in
+            self.capturedImage = image
+            self.recognizeImage(image.rotate(radians: 270) ?? image)
+        })
     }
 }

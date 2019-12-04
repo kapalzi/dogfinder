@@ -29,25 +29,26 @@ class SearchDogsTableViewController: UIViewController {
             return false
         }
     }
-    
+
     private func numberOfCellsInView() -> Int {
         return Int((self.tableView.frame.height / self.tableView.rowHeight) + 1)
     }
-    
+
     private func areAllCells() -> Bool {
-        
-        if numberOfCellsInView() < self.viewModel.dogs.count {
-            return false
-        } else {
-            return true
-        }
+
+        return self.viewModel.dogs.count <= 20 ? true : false
+//        if numberOfCellsInView() < self.viewModel.dogs.count {
+//            return false
+//        } else {
+//            return true
+//        }
     }
-    
+
     private func doLoadNext(indexPath: IndexPath) -> Bool {
-        
+
         return isLastCell(indexPath: indexPath) && areAllCells() ? true : false
     }
-    
+
     private func initCell(_ cell: SearchDogsTableViewCell, indexPath: IndexPath) {
 
         if self.viewModel.dogs.count >= indexPath.row {
@@ -75,12 +76,23 @@ extension SearchDogsTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.viewModel.dogs.count > 0 ? self.viewModel.dogs.count + 1 : 0
+        if self.viewModel.dogs.count > 0 {
+
+            if areAllCells() {
+                return self.viewModel.dogs.count
+            } else {
+                return self.viewModel.dogs.count + 1
+            }
+        } else {
+            return 0
+        }
+
+//        return self.viewModel.dogs.count > 0 ? self.viewModel.dogs.count + 1 : 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if isLastCell(indexPath: indexPath) {
+        if doLoadNext(indexPath: indexPath) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
             return cell
         }
@@ -94,11 +106,9 @@ extension SearchDogsTableViewController: UITableViewDataSource {
         return cell
     }
 
-
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if doLoadNext(indexPath: indexPath) && cell is LoadMoreTableViewCell {
-            
+
             if self.viewModel.areSpotted {
                 self.viewModel.downloadNextSpottedDogs {
                     self.tableView.reloadData()

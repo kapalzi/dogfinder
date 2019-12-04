@@ -9,7 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-class User {
+class User: NSObject, NSCoding {
+
+    required init?(coder: NSCoder) {
+        self.id = coder.decodeObject(forKey: "_id") as! String
+        self.username = coder.decodeObject(forKey: "username") as! String
+        self.email = coder.decodeObject(forKey: "email") as! String
+    }
 
     static let kId = "_id"
     static let kUsername = "username"
@@ -24,6 +30,13 @@ class User {
         self.id = id
         self.username = username
         self.email = email
+    }
+
+    func encode(with coder: NSCoder) {
+
+        coder.encode(id, forKey: "_id")
+        coder.encode(username, forKey: "username")
+        coder.encode(email, forKey: "email")
     }
 
     public static func fromJson(json: JSON) -> User? {

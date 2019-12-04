@@ -46,6 +46,7 @@ class FormViewController: BaseDetailsViewController, UITextViewDelegate {
 
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width))
         imageView.image = self.viewModel.dogPhoto
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }
 
