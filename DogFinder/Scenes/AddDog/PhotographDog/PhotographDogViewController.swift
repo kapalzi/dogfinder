@@ -58,7 +58,7 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
 
         let orientation: UIDeviceOrientation = UIDevice.current.orientation
 
-        switch (orientation) {
+        switch orientation {
         case .portrait:
             previewLayer?.connection?.videoOrientation = .portrait
         case .landscapeRight:
@@ -177,7 +177,14 @@ class PhotographDogViewController: UIViewController, AVCaptureVideoDataOutputSam
                 defaultVideoDevice = frontCameraDevice
             }
 
-            let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
+            guard let defaultDevice = defaultVideoDevice else {
+                print("Could not add video device input to the session")
+                setupResult = .configurationFailed
+                session.commitConfiguration()
+                return
+            }
+
+            let videoDeviceInput = try AVCaptureDeviceInput(device: defaultDevice)
 
             if session.canAddInput(videoDeviceInput) {
                 session.addInput(videoDeviceInput)

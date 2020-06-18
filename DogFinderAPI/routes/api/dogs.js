@@ -69,7 +69,7 @@ router.get('/all', async (req, res) => {
                  }
                 }
                }).find({isSpotted: req.query.areSpotted}).limit(20)
-        
+            console.log(dogs)
             res.json(dogs)
             } catch(err) {
                 res.json({ message: err })

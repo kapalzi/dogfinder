@@ -6,6 +6,7 @@ const DogSchema = mongoose.Schema({
     latitude: Number,
     longitude: Number,
     seenDate: Date,
+    photo: "",
     photoName: String,
     user: String,
     isSpotted: Boolean,

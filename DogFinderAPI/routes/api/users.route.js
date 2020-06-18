@@ -50,11 +50,13 @@ router.post("/login", async (req, response) => {
                   email: user.email
                 });
             } else {
-              return response.status(400).send("Wrong password.");
+              return res.json({ message: "Wrong password." })
+              // return response.status(400).send({"Message": "Wrong password."});
             }
           });
          } else {
-        return response.status(400).send("User does not exist.");
+          return res.json({ message: "User does not exist." })
+        // return response.status(400).send({"Message": "User does not exist."});
     }
   });
 

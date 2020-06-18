@@ -114,7 +114,7 @@ class FormViewModel: BaseViewModel, CurrentLocationProtocol {
             return
         }
 
-        let dog = Dog(breed: breed, longitude: coordinates.longitude, latitude: coordinates.latitude, seenDate: Date(), photo: dogImageBase ?? "", user: SessionController.sharedInstance.currentUser.id, isSpotted: isSpotted, size: size, color: color, gender: gender, depiction: depiction ?? "")
+        let dog = Dog(breed: breed, longitude: coordinates.longitude, latitude: coordinates.latitude, seenDate: Date(), photo: dogImageBase ?? "", user: SessionController.sharedInstance.currentUser._id, isSpotted: isSpotted, size: size, color: color, gender: gender, depiction: depiction ?? "")
 
         self.api.addDog(dog, completionHandler: completion, errorHandler: error)
     }

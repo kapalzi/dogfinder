@@ -8,8 +8,7 @@ target 'DogFinder' do
   inhibit_all_warnings!
 
   # Pods for DogFinder
-  pod 'Alamofire'
-  pod 'SwiftyJSON'
+  pod 'Alamofire', '~> 5.0'
   pod 'Kingfisher', '~> 5.0'
   pod 'SwiftLint'
 

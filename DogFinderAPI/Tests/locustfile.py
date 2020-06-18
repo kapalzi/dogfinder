@@ -56,7 +56,8 @@ class UserBehavior(TaskSet):
                 "location": {
                     "type": "Point",
                     "coordinates": []
-                 }
+                 },
+                 "photo": ""
                         })
     @task(4)
     def getDogsByDate(self):

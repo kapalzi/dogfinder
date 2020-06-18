@@ -8,14 +8,13 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class DogFinderApi: DogFinderApiProvider {
 
     public static let sharedInstance = DogFinderApi()
 
 //    private let baseURL = "http://192.168.1.160:5000" //biuro
-    private let baseURL = "http://192.168.1.11:5000"    //dom
+    private let baseURL = "http://192.168.1.13:5000"    //dom
 //    private let baseURL = "http://localhost:5000"
 
     private enum Endpoint: String {
@@ -42,76 +41,63 @@ class DogFinderApi: DogFinderApiProvider {
         return header
     }
 
-    private func performRequest(method: HTTPMethod, url: String, parameters: Parameters?, encoding: ParameterEncoding, headers: [String: String]?, handler:((_:(DataResponse<Any>)) -> Void)?) {
-        do {
-            try Alamofire.request(url.asURL(), method: method, parameters: parameters, encoding: encoding, headers: headers)
-                .responseJSON { response in
-                    handler?(response)
-            }
-        } catch {
-            print(error)
-        }
-    }
-
     public func addDog(_ dog: Dog, completionHandler:@escaping ((String) -> Void), errorHandler:@escaping ((String) -> Void)) {
 
-        let params = dog.serializeToJson()
-
-        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .getAllDogs), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
+        AF.request(self.createRequestPath(endpoint: .getAllDogs), method: .post, parameters: dog, encoder: JSONParameterEncoder.default, headers: nil, interceptor: nil).responseString { (response) in
             switch response.result {
-            case .success(let responseObject):
-                let json = JSON(responseObject)
-                print(json["message"].string ?? "")
-                completionHandler(json["message"].string ?? "")
+                case .success(let responseObject):
+                    completionHandler(responseObject)
 
-            case .failure(let error):
-                errorHandler(error.localizedDescription)
-            }
+                case .failure(let error):
+                    errorHandler(error.localizedDescription)
+                }
         }
     }
 
     public func getNextDogs(pageNumber: Int, areSpotted: Bool, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .date, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        AF.request(self.createRequestPath(endpoint: .date, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)"), method: .get, headers: self.createAuthorizationHeaders()).response { (response) in
             switch response.result {
-            case .success(let responseObject):
-                let json = JSON(responseObject)
+                case .success(let responseObject):
+                    if let payload = responseObject {
+                        DogFinderApiParser.parseJsonWithDogs(payload, completionHandler: completionHandler)
+                    }
 
-                DogFinderApiParser.parseJsonWithDogs(json, completionHandler: completionHandler)
-
-            case .failure:
-                errorHandler(response.error!)
-            }
+                case .failure:
+                    errorHandler(response.error!)
+                }
         }
     }
 
     func getNextNearestDogs(pageNumber: Int, areSpotted: Bool, latitude: Double, longitude: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        AF.request(self.createRequestPath(endpoint: .getAllDogs, param: "?page=\(pageNumber)&areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)"), method: .get,
+                   headers: self.createAuthorizationHeaders()).response { (response) in
             switch response.result {
-            case .success(let responseObject):
-                let json = JSON(responseObject)
+                case .success(let responseObject):
+                    if let payload = responseObject {
+                        DogFinderApiParser.parseJsonWithDogs(payload, completionHandler: completionHandler)
+                    }
 
-                DogFinderApiParser.parseJsonWithDogs(json, completionHandler: completionHandler)
-
-            case .failure:
-                errorHandler(response.error!)
-            }
+                case .failure:
+                    errorHandler(response.error!)
+                }
         }
     }
 
     func getNextNearestDogsOnMap(areSpotted: Bool, latitude: Double, longitude: Double, radius: Double, completionHandler:@escaping ((_:[Dog]?) -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        self.performRequest(method: .get, url: self.createRequestPath(endpoint: .map, param: "?areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)"), parameters: nil, encoding: JSONEncoding.default, headers: self.createAuthorizationHeaders()) { (response) in
+        AF.request(self.createRequestPath(endpoint: .map, param: "?areSpotted=\(areSpotted)&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)"), method: .get,
+                   headers: self.createAuthorizationHeaders()).response { (response) in
             switch response.result {
-            case .success(let responseObject):
-                let json = JSON(responseObject)
+                case .success(let responseObject):
+                    if let payload = responseObject {
+                        DogFinderApiParser.parseJsonWithDogs(payload, completionHandler: completionHandler)
+                    }
 
-                DogFinderApiParser.parseJsonWithDogs(json, completionHandler: completionHandler)
-
-            case .failure:
-                errorHandler(response.error!)
-            }
+                case .failure:
+                    errorHandler(response.error!)
+                }
         }
     }
 
@@ -122,48 +108,49 @@ class DogFinderApi: DogFinderApiProvider {
 
     public func login(username: String, password: String, completionHandler:@escaping (() -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        let params = ["username": username, "password": password] as Parameters
-        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .login), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
+        let params = ["username": username, "password": password]
+
+        AF.request(self.createRequestPath(endpoint: .login), method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: nil, interceptor: nil).response { (response) in
             switch response.result {
             case .success(let responseObject):
-                let json = JSON(responseObject)
-                DogFinderApiParser.parseJsonWithUser(json, completionHandler: { (user) in
+                if let payload = responseObject {
+                        DogFinderApiParser.parseJsonWithUser(payload, completionHandler: { (user) in
+                        SessionController.sharedInstance.currentUser = user
+                        if let headers = response.response?.allHeaderFields as? [String: String] {
+                            let token = headers["x-auth-token"]
+                            SessionController.sharedInstance.token = token
+                        }
+                    })
+                    completionHandler()
+                }
 
-                    SessionController.sharedInstance.currentUser = user
-
-                    if let headers = response.response?.allHeaderFields as? [String: String] {
-                        let token = headers["x-auth-token"]
-                        SessionController.sharedInstance.token = token
-                    }
-                })
-                completionHandler()
-
-            case .failure:
-                errorHandler(response.error!)
+            case .failure(let error):
+                errorHandler(error)
             }
         }
     }
 
     public func register(username: String, password: String, email: String, completionHandler:@escaping (() -> Void), errorHandler:@escaping ((_ error: Error) -> Void)) {
 
-        let params = ["email": email, "username": username, "password": password] as Parameters
-        self.performRequest(method: .post, url: self.createRequestPath(endpoint: .register), parameters: params, encoding: JSONEncoding.default, headers: nil) { (response) in
+        let params = ["email": email, "username": username, "password": password]
+
+        AF.request(self.createRequestPath(endpoint: .register), method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: nil, interceptor: nil).response { (response) in
             switch response.result {
             case .success(let responseObject):
-                let json = JSON(responseObject)
-                DogFinderApiParser.parseJsonWithUser(json, completionHandler: { (user) in
+                if let payload = responseObject {
+                    DogFinderApiParser.parseJsonWithUser(payload, completionHandler: { (user) in
 
-                    SessionController.sharedInstance.currentUser = user
+                        SessionController.sharedInstance.currentUser = user
 
-                    if let headers = response.response?.allHeaderFields as? [String: String] {
-                        let token = headers["x-auth-token"]
-                        SessionController.sharedInstance.token = token
-                    }
-                })
-                completionHandler()
-
-            case .failure:
-                errorHandler(response.error!)
+                        if let headers = response.response?.allHeaderFields as? [String: String] {
+                            let token = headers["x-auth-token"]
+                            SessionController.sharedInstance.token = token
+                        }
+                    })
+                    completionHandler()
+                }
+            case  .failure(let error):
+                errorHandler(error)
             }
         }
     }

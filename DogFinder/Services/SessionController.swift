@@ -18,35 +18,24 @@ class SessionController {
     }
     public var currentUser: User! {
         didSet {
-
             guard let user = self.currentUser else { return }
-            do {
-               let encodedData = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
-                UserDefaults.standard.set(encodedData, forKey: "user")
-            } catch let error {
-                print(error)
-            }
+            UserDefaults.standard.set(user._id, forKey: "userId")
+            UserDefaults.standard.set(user.username, forKey: "userName")
+            UserDefaults.standard.set(user.email, forKey: "email")
         }
     }
 
     func isUserLoggedIn() -> Bool {
 
-        self.token = UserDefaults.standard.string(forKey: "token")
-        if let data = UserDefaults.standard.data(forKey: "user") {
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return false }
+        self.token = token
 
-            do {
-                self.currentUser = try NSKeyedUnarchiver.unarchivedObject(ofClass: User.self, from: data)
-            } catch let error {
-                print(error)
-            }
+        guard let id = UserDefaults.standard.string(forKey: "userId") else { return false }
+        guard let userName = UserDefaults.standard.string(forKey: "userName") else { return false }
+        guard let email = UserDefaults.standard.string(forKey: "email") else { return false }
+        self.currentUser = User(id: id, username: userName, email: email)
 
-        }
-
-        if self.currentUser == nil || self.token == nil {
-            return false
-        } else {
-            return true
-        }
+        return true
     }
 
     func logout() {
@@ -54,7 +43,9 @@ class SessionController {
         self.currentUser = nil
         self.token = nil
         UserDefaults.standard.set(nil, forKey: "token")
-        UserDefaults.standard.set(nil, forKey: "user")
+        UserDefaults.standard.set(nil, forKey: "userId")
+        UserDefaults.standard.set(nil, forKey: "userName")
+        UserDefaults.standard.set(nil, forKey: "email")
     }
 
 }
